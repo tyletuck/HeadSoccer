@@ -1,6 +1,6 @@
 ﻿namespace HeadSoccer.Screens
 {
-    partial class GameScreen
+    partial class StatScreen
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,31 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.GameTimer = new System.Windows.Forms.Timer(this.components);
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.MainButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // GameTimer
+            // MainButton
             // 
-            this.GameTimer.Tick += new System.EventHandler(this.timer1_Tick);
+            this.MainButton.Location = new System.Drawing.Point(517, 425);
+            this.MainButton.Name = "MainButton";
+            this.MainButton.Size = new System.Drawing.Size(288, 98);
+            this.MainButton.TabIndex = 0;
+            this.MainButton.Text = "Main Menu";
+            this.MainButton.UseVisualStyleBackColor = true;
+            this.MainButton.Click += new System.EventHandler(this.MainButton_Click);
             // 
-            // GameScreen
+            // StatScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.LightPink;
-            this.Name = "GameScreen";
+            this.BackColor = System.Drawing.Color.CadetBlue;
+            this.Controls.Add(this.MainButton);
+            this.Name = "StatScreen";
             this.Size = new System.Drawing.Size(1106, 720);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.GameScreen_KeyUp);
-            this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.GameScreen_PreviewKeyDown);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Timer GameTimer;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button MainButton;
     }
 }
