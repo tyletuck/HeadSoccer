@@ -24,37 +24,21 @@ namespace HeadSoccer.Screens
         private void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             //pause screen function
-
             if (e.KeyCode == Keys.Escape && GameTimer.Enabled)
-
             {
-
                 GameTimer.Enabled = false;
-
-                
 
                 DialogResult result = PauseScreen.Show();
 
-
-
                 if (result == DialogResult.Cancel)
-
                 {
-
                     GameTimer.Enabled = true;
-
                 }
-
                 else if (result == DialogResult.Abort)
-
                 {
                     Application.Exit();
-   
-
                 }
             }
-
-
         }
 
         private void timer1_Tick(object sender, EventArgs e)

@@ -68,6 +68,7 @@
             this.Controls.Add(this.continueButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "PauseScreen";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PauseScreen";
             this.ResumeLayout(false);
 

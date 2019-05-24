@@ -55,14 +55,15 @@ namespace HeadSoccer.Screens
 
         private void exitButton_Click(object sender, EventArgs e)
         {
-            buttonResult = DialogResult.Cancel;
+            buttonResult = DialogResult.Abort;
             pauseForm.Close();
         }
 
         private void continueButton_Click(object sender, EventArgs e)
         {
-            buttonResult = DialogResult.Abort;
+            buttonResult = DialogResult.Cancel;
             pauseForm.Close();
+
         }
     }
 }
