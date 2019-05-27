@@ -13,7 +13,7 @@ namespace HeadSoccer.Screens
 {
     public partial class GameScreen : UserControl
     {
-        bool escDown = false, wDown, aDown, sDown, dDown, upDown, leftDown, downDown, rightDown;
+        bool escDown = false, aDown, dDown, leftDown, rightDown;
         List<Rectangle> hitBox = new List<Rectangle>();
 
         public GameScreen()
@@ -26,22 +26,18 @@ namespace HeadSoccer.Screens
 
             hitBox.Add(player1);
             hitBox.Add(player2);
+
+
         }
 
         private void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             switch (e.KeyCode)
             {
-                case Keys.W:
-                    wDown = true;
-                    break;
                 case Keys.A:
                     aDown = true;
                     break;
-                case Keys.S:
-                    sDown = true;
-                    break;
-                case Keys.D:
+                  case Keys.D:
                     dDown = true;
                     break;
                 case Keys.Left:
@@ -49,12 +45,6 @@ namespace HeadSoccer.Screens
                     break;
                 case Keys.Right:
                     rightDown = true;
-                    break;
-                case Keys.Up:
-                    upDown = true;
-                    break;
-                case Keys.Down:
-                    downDown = true;
                     break;
             }
 
@@ -78,9 +68,9 @@ namespace HeadSoccer.Screens
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (wDown == true)
+            if (aDown == true)
             {
-
+                
             }
         }
 
@@ -91,14 +81,8 @@ namespace HeadSoccer.Screens
                 case Keys.Escape:
                     escDown = false;
                     break;
-                case Keys.W:
-                    wDown = false;
-                    break;
                 case Keys.A:
                     aDown = false;
-                    break;
-                case Keys.S:
-                    sDown = false;
                     break;
                 case Keys.D:
                     dDown = false;
@@ -108,12 +92,6 @@ namespace HeadSoccer.Screens
                     break;
                 case Keys.Right:
                     rightDown = false;
-                    break;
-                case Keys.Up:
-                    upDown = false;
-                    break;
-                case Keys.Down:
-                    downDown = false;
                     break;
             }
         }
