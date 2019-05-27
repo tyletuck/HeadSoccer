@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Player.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,6 +90,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Screens\GameScreen.resx">
       <DependentUpon>GameScreen.cs</DependentUpon>
@@ -115,8 +117,39 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+
   <ItemGroup>
     <Folder Include="Classes\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Chufu Cry Head.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cool Cat Head.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Goal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Kanye powerup.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Player 1 Wins.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Player 2 wins.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Stadium.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Thanos Ouch Head.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ugly Jaden Head.png" />
+  </ItemGroup>
+
+
+
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
