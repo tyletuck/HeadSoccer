@@ -33,13 +33,19 @@
             // 
             // MainButton
             // 
-            this.MainButton.Location = new System.Drawing.Point(517, 425);
+            this.MainButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
+            this.MainButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
+            this.MainButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.MainButton.Font = new System.Drawing.Font("Machine BT", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MainButton.Location = new System.Drawing.Point(16, 634);
             this.MainButton.Name = "MainButton";
-            this.MainButton.Size = new System.Drawing.Size(288, 98);
-            this.MainButton.TabIndex = 0;
+            this.MainButton.Size = new System.Drawing.Size(173, 66);
+            this.MainButton.TabIndex = 1;
             this.MainButton.Text = "Main Menu";
             this.MainButton.UseVisualStyleBackColor = true;
             this.MainButton.Click += new System.EventHandler(this.MainButton_Click);
+            this.MainButton.Enter += new System.EventHandler(this.MainButton_Enter);
+            this.MainButton.Leave += new System.EventHandler(this.MainButton_Leave);
             // 
             // StatScreen
             // 
