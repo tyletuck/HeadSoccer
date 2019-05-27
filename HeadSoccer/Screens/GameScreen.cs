@@ -8,13 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using HeadSoccer.Classes;
 
 namespace HeadSoccer.Screens
 {
     public partial class GameScreen : UserControl
     {
-        bool escDown = false, aDown, dDown, leftDown, rightDown;
+        bool escDown = false, aDown, dDown, leftDown, rightDown,zDown, spaceDown;
         List<Rectangle> hitBox = new List<Rectangle>();
+        List<Player> Players = new List<Player>();
 
         public GameScreen()
         {
@@ -27,7 +29,11 @@ namespace HeadSoccer.Screens
             hitBox.Add(player1);
             hitBox.Add(player2);
 
+            Player p1 = new Player(100, 650, 5, "left");
+            Player p2 = new Player(this.Width - 100, 650,5,"right");
 
+            Players.Add(p1);
+            Players.Add(p2);
         }
 
         private void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -45,6 +51,12 @@ namespace HeadSoccer.Screens
                     break;
                 case Keys.Right:
                     rightDown = true;
+                    break;
+                case Keys.Space:
+                    spaceDown = true;
+                    break;
+                case Keys.Z:
+                    zDown = true;
                     break;
             }
 
@@ -70,7 +82,28 @@ namespace HeadSoccer.Screens
         {
             if (aDown == true)
             {
-                
+                Players[1].PlayerMove("left");
+            }
+            if (dDown == true)
+            {
+                Players[1].PlayerMove("right");
+            }
+            if (zDown == true)
+            {
+                Players[1].PlayerJump();
+            }
+
+            if (leftDown == true)
+            {
+                Players[0].PlayerMove("left");
+            }
+            if (rightDown == true)
+            {
+                Players[0].PlayerMove("right");
+            }
+            if (spaceDown == true)
+            {
+                Players[0].PlayerJump();
             }
         }
 
@@ -92,6 +125,12 @@ namespace HeadSoccer.Screens
                     break;
                 case Keys.Right:
                     rightDown = false;
+                    break;
+                case Keys.Space:
+                    spaceDown = false;
+                    break;
+                case Keys.Z:
+                    zDown = false;
                     break;
             }
         }
