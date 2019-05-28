@@ -28,10 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.Char1 = new System.Windows.Forms.PictureBox();
             this.Char2 = new System.Windows.Forms.PictureBox();
-            this.updateTimer = new System.Windows.Forms.Timer(this.components);
+            this.gameButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Char1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Char2)).BeginInit();
             this.SuspendLayout();
@@ -58,16 +57,21 @@
             this.Char2.TabIndex = 1;
             this.Char2.TabStop = false;
             // 
-            // updateTimer
+            // gameButton
             // 
-            this.updateTimer.Enabled = true;
-            this.updateTimer.Tick += new System.EventHandler(this.updateTimer_Tick);
+            this.gameButton.Location = new System.Drawing.Point(509, 562);
+            this.gameButton.Name = "gameButton";
+            this.gameButton.Size = new System.Drawing.Size(75, 23);
+            this.gameButton.TabIndex = 2;
+            this.gameButton.Text = "Play";
+            this.gameButton.UseVisualStyleBackColor = true;
             // 
             // CharacterScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Firebrick;
+            this.Controls.Add(this.gameButton);
             this.Controls.Add(this.Char2);
             this.Controls.Add(this.Char1);
             this.Name = "CharacterScreen";
@@ -85,6 +89,6 @@
 
         private System.Windows.Forms.PictureBox Char1;
         private System.Windows.Forms.PictureBox Char2;
-        private System.Windows.Forms.Timer updateTimer;
+        private System.Windows.Forms.Button gameButton;
     }
 }

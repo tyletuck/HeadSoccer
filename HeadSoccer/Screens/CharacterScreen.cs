@@ -26,16 +26,16 @@ namespace HeadSoccer.Screens
             switch (e.KeyCode)
             {
                 case Keys.W:
-                    wDown = true;
+                    Rotation1Up();
                     break;
                 case Keys.S:
-                    sDown = true;
+                    Rotation1Down();
                     break;
                 case Keys.Down:
-                    downDown = true;
+                    Rotation2Down();
                     break;
                 case Keys.Up:
-                    upDown = true;
+                    Rotation2Up();
                     break;
             }
         }
@@ -59,61 +59,67 @@ namespace HeadSoccer.Screens
             }
         }
 
-        private void updateTimer_Tick(object sender, EventArgs e)
+        public void Rotation1Up()
         {
-            if (wDown == true)
+            if (rotation1 >= 5)
             {
-                if (rotation1 >= 4)
-                {
-                    rotation1 = 1;
-                }
-                else
-                {
-                    rotation1++;
-                }
+                rotation1 = 1;
             }
-            if (sDown == true)
+            else
             {
-                if (rotation1 <= 1)
-                {
-                    rotation1 = 4;
-                }
-                else
-                {
-                    rotation1--;
-                }
+                rotation1++;
             }
+            drawChar();
+        }
 
-            if (upDown == true)
+        public void Rotation1Down()
+        {
+            if (rotation1 <= 0)
             {
-                if (rotation2 >= 4)
-                {
-                    rotation2 = 1;
-                }
-                else
-                {
-                    rotation2++;
-                }
+                rotation1 = 4;
             }
-            if (downDown == true)
+            else
             {
-                if (rotation2 <= 1)
-                {
-                    rotation2 = 4;
-                }
-                else
-                {
-                    rotation2--;
-                }
+                rotation1--;
             }
+            drawChar();
+        }
 
+        public void Rotation2Up()
+        {
+            if (rotation2 >= 5)
+            {
+                rotation2 = 1;
+            }
+            else
+            {
+                rotation2++;
+            }
+            drawChar();
+        }
+
+        public void Rotation2Down()
+        {
+            if (rotation2 <= 0)
+            {
+                rotation2 = 4;
+            }
+            else
+            {
+                rotation2--;
+            }
+            drawChar();
+        }
+
+        public void drawChar()
+        {
             switch (rotation1)
             {
                 case 1:
                     Char1.BackgroundImage = Properties.Resources.Chufu_Cry_Head;
                     break;
                 case 2:
-                    Char1.BackgroundImage = Properties.Resources.Chufu_Cry_Head;
+                    Char1.BackgroundImage = Properties.Resources.Cool_Cat_Head;
                     break;
                 case 3:
                     Char1.BackgroundImage = Properties.Resources.Ugly_Jaden_Head;
@@ -129,7 +135,7 @@ namespace HeadSoccer.Screens
                     Char2.BackgroundImage = Properties.Resources.Chufu_Cry_Head;
                     break;
                 case 2:
-                    Char2.BackgroundImage = Properties.Resources.Chufu_Cry_Head;
+                    Char2.BackgroundImage = Properties.Resources.Cool_Cat_Head;
                     break;
                 case 3:
                     Char2.BackgroundImage = Properties.Resources.Ugly_Jaden_Head;
@@ -140,10 +146,6 @@ namespace HeadSoccer.Screens
             }
 
             Refresh();
-        
-        
         }
-
-
     }
 }
