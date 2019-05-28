@@ -45,5 +45,36 @@ namespace HeadSoccer.Screens
 
             ss.Location = new Point((f.Width - ss.Width) / 2, (f.Height - ss.Height) / 2);
         }
+
+        private void playButton_Enter(object sender, EventArgs e)
+        {
+            playButton.BackColor = Color.Red;
+        }
+
+        private void playButton_Leave(object sender, EventArgs e)
+        {
+            playButton.BackColor = Color.White;
+        }
+
+        private void statButton_Leave(object sender, EventArgs e)
+        {
+            statButton.BackColor = Color.White;
+        }
+
+        private void statButton_Enter(object sender, EventArgs e)
+        {
+            statButton.BackColor = Color.Red;
+        }
+
+        private void exitButton_Enter(object sender, EventArgs e)
+        {
+            exitButton.BackColor = Color.Red;
+        }
+
+        private void exitButton_Leave(object sender, EventArgs e)
+        {
+            exitButton.BackColor = Color.White;
+        }
+
     }
 }

@@ -27,5 +27,16 @@ namespace HeadSoccer.Screens
 
             ms.Location = new Point((f.Width - ms.Width) / 2, (f.Height - ms.Height) / 2);
         }
+
+        private void MainButton_Enter(object sender, EventArgs e)
+        {
+            MainButton.BackColor = Color.Red;
+        }
+
+        private void MainButton_Leave(object sender, EventArgs e)
+        {
+            MainButton.BackColor = Color.White;
+        }
+
     }
 }
