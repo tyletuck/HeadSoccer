@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ball.cs" />
     <Compile Include="Classes\Player.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -117,9 +118,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-
   <ItemGroup>
-    <Folder Include="Classes\" />
+    <None Include="Resources\Ball.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Chufu Cry Head.png" />
@@ -148,8 +148,8 @@
   <ItemGroup>
     <None Include="Resources\Ugly Jaden Head.png" />
   </ItemGroup>
-
-
-
+  <ItemGroup>
+    <None Include="Resources\Soccer_Ball_PNG_Clip_Art-1361.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
