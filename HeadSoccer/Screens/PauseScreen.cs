@@ -65,5 +65,25 @@ namespace HeadSoccer.Screens
             pauseForm.Close();
 
         }
+
+        private void continueButton_Enter(object sender, EventArgs e)
+        {
+            continueButton.BackColor = Color.Red;
+        }
+
+        private void continueButton_Leave(object sender, EventArgs e)
+        {
+            continueButton.BackColor = Color.White;
+        }
+
+        private void exitButton_Enter(object sender, EventArgs e)
+        {
+            exitButton.BackColor = Color.Red;
+        }
+
+        private void exitButton_Leave(object sender, EventArgs e)
+        {   
+            exitButton.BackColor = Color.White;
+        }
     }
 }
