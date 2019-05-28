@@ -12,9 +12,9 @@ namespace HeadSoccer.Screens
 {
     public partial class CharacterScreen : UserControl
     {
-        bool wDown, sDown, upDown, downDown;
-        int rotation1 = 1;
-        int rotation2 = 1;
+        bool p1Ready = false, p2Ready = false;
+        public static int rotation1 = 1;
+        public static int rotation2 = 1;
 
         public CharacterScreen()
         {
@@ -26,87 +26,86 @@ namespace HeadSoccer.Screens
             switch (e.KeyCode)
             {
                 case Keys.W:
-                    Rotation1Up();
-                    break;
-                case Keys.S:
-                    Rotation1Down();
-                    break;
-                case Keys.Down:
-                    Rotation2Down();
-                    break;
-                case Keys.Up:
                     Rotation2Up();
                     break;
-            }
-        }
-
-        private void CharacterScreen_KeyUp(object sender, KeyEventArgs e)
-        {
-            switch (e.KeyCode)
-            {
-                case Keys.W:
-                    wDown = false;
-                    break;
                 case Keys.S:
-                    sDown = false;
+                    Rotation2Down();
                     break;
                 case Keys.Down:
-                    downDown = false;
+                    Rotation1Down();
                     break;
                 case Keys.Up:
-                    upDown = false;
+                    Rotation1Up();
+                    break;
+                case Keys.Space:
+                    player1Ready();
+                    break;
+                case Keys.Z:
+                    player2Ready();
                     break;
             }
         }
 
         public void Rotation1Up()
         {
-            if (rotation1 >= 5)
+            if (p1Ready == false)
             {
-                rotation1 = 1;
-            }
-            else
-            {
-                rotation1++;
+                if (rotation1 >= 5)
+                {
+                    rotation1 = 1;
+                }
+                else
+                {
+                    rotation1++;
+                }
             }
             drawChar();
         }
 
         public void Rotation1Down()
         {
-            if (rotation1 <= 0)
+            if (p1Ready == false)
             {
-                rotation1 = 4;
-            }
-            else
-            {
-                rotation1--;
+                if (rotation1 <= 0)
+                {
+                    rotation1 = 4;
+                }
+                else
+                {
+                    rotation1--;
+                }
             }
             drawChar();
         }
 
         public void Rotation2Up()
         {
-            if (rotation2 >= 5)
+            if (p2Ready == false)
             {
-                rotation2 = 1;
-            }
-            else
-            {
-                rotation2++;
+                if (rotation2 >= 5)
+                {
+                    rotation2 = 1;
+                }
+                else
+                {
+                    rotation2++;
+                }
             }
             drawChar();
         }
 
         public void Rotation2Down()
         {
-            if (rotation2 <= 0)
+            if (p2Ready == false)
             {
-                rotation2 = 4;
-            }
-            else
-            {
-                rotation2--;
+                if (rotation2 <= 0)
+                {
+                    rotation2 = 4;
+                }
+                else
+                {
+                    rotation2--;
+                }
             }
             drawChar();
         }
@@ -146,6 +145,51 @@ namespace HeadSoccer.Screens
             }
 
             Refresh();
+        }
+
+        public void player1Ready()
+        {
+            if (p1Ready == false)
+            {
+                p1Ready = true;
+                p1ReadyLabel.Visible = true;
+            }
+            else
+            {
+                p1Ready = false;
+                p1ReadyLabel.Visible = false;
+            }
+            readyCheck();
+        }
+
+        public void player2Ready()
+        {
+            if (p2Ready == false)
+            {
+                p2Ready = true;
+                p2ReadyLabel.Visible = true;
+            }
+            else
+            {
+                p2Ready = false;
+                p2ReadyLabel.Visible = false;
+            }
+            readyCheck();
+        }
+
+        public void readyCheck()
+        {
+            if (p1Ready == true && p2Ready == true)
+            {
+                Form f = this.FindForm();
+                f.Controls.Remove(this);
+
+                GameScreen gs = new GameScreen();
+                f.Controls.Add(gs);
+
+                gs.Location = new Point((f.Width - gs.Width) / 2, (f.Height - gs.Height) / 2);
+                gs.Focus();
+            }
         }
     }
 }

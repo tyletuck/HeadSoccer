@@ -30,7 +30,9 @@
         {
             this.Char1 = new System.Windows.Forms.PictureBox();
             this.Char2 = new System.Windows.Forms.PictureBox();
-            this.gameButton = new System.Windows.Forms.Button();
+            this.InstructLabel = new System.Windows.Forms.Label();
+            this.p1ReadyLabel = new System.Windows.Forms.Label();
+            this.p2ReadyLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Char1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Char2)).BeginInit();
             this.SuspendLayout();
@@ -57,26 +59,48 @@
             this.Char2.TabIndex = 1;
             this.Char2.TabStop = false;
             // 
-            // gameButton
+            // InstructLabel
             // 
-            this.gameButton.Location = new System.Drawing.Point(509, 562);
-            this.gameButton.Name = "gameButton";
-            this.gameButton.Size = new System.Drawing.Size(75, 23);
-            this.gameButton.TabIndex = 2;
-            this.gameButton.Text = "Play";
-            this.gameButton.UseVisualStyleBackColor = true;
+            this.InstructLabel.AutoSize = true;
+            this.InstructLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.InstructLabel.Location = new System.Drawing.Point(414, 588);
+            this.InstructLabel.Name = "InstructLabel";
+            this.InstructLabel.Size = new System.Drawing.Size(299, 24);
+            this.InstructLabel.TabIndex = 2;
+            this.InstructLabel.Text = "Press the green button to ready up";
+            // 
+            // p1ReadyLabel
+            // 
+            this.p1ReadyLabel.AutoSize = true;
+            this.p1ReadyLabel.Location = new System.Drawing.Point(299, 493);
+            this.p1ReadyLabel.Name = "p1ReadyLabel";
+            this.p1ReadyLabel.Size = new System.Drawing.Size(47, 13);
+            this.p1ReadyLabel.TabIndex = 3;
+            this.p1ReadyLabel.Text = "READY!";
+            this.p1ReadyLabel.Visible = false;
+            // 
+            // p2ReadyLabel
+            // 
+            this.p2ReadyLabel.AutoSize = true;
+            this.p2ReadyLabel.Location = new System.Drawing.Point(762, 493);
+            this.p2ReadyLabel.Name = "p2ReadyLabel";
+            this.p2ReadyLabel.Size = new System.Drawing.Size(47, 13);
+            this.p2ReadyLabel.TabIndex = 4;
+            this.p2ReadyLabel.Text = "READY!";
+            this.p2ReadyLabel.Visible = false;
             // 
             // CharacterScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Firebrick;
-            this.Controls.Add(this.gameButton);
+            this.Controls.Add(this.p2ReadyLabel);
+            this.Controls.Add(this.p1ReadyLabel);
+            this.Controls.Add(this.InstructLabel);
             this.Controls.Add(this.Char2);
             this.Controls.Add(this.Char1);
             this.Name = "CharacterScreen";
             this.Size = new System.Drawing.Size(1106, 720);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.CharacterScreen_KeyUp);
             this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.CharacterScreen_PreviewKeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.Char1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Char2)).EndInit();
@@ -89,6 +113,8 @@
 
         private System.Windows.Forms.PictureBox Char1;
         private System.Windows.Forms.PictureBox Char2;
-        private System.Windows.Forms.Button gameButton;
+        private System.Windows.Forms.Label InstructLabel;
+        private System.Windows.Forms.Label p1ReadyLabel;
+        private System.Windows.Forms.Label p2ReadyLabel;
     }
 }
