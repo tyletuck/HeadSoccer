@@ -37,5 +37,6 @@ namespace HeadSoccer.Screens
         {
             MainButton.BackColor = Color.White;
         }
+
     }
 }
