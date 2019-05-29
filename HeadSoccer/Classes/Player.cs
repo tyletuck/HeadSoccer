@@ -8,17 +8,19 @@ namespace HeadSoccer.Classes
 {
     public class Player
     {
-        public static int x, y, speed;
+        public static int x, y, speed, width, height;
         public static string direction;
         int jumpHeight = 40, counter = 1;
         bool flag = true;
 
-        public Player(int _x, int _y, int _speed, string _direction)
+        public Player(int _x, int _y, int _speed, string _direction, int _width, int _height)
         {
             x = _x;
             y = _y;
             speed = _speed;
             direction = _direction;
+            width = _width;
+            height = _height;
         }
 
         public void PlayerMove(string _direction)

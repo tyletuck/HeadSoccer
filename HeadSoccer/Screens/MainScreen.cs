@@ -22,11 +22,11 @@ namespace HeadSoccer.Screens
             Form f = this.FindForm();
             f.Controls.Remove(this);
 
-            GameScreen gs = new GameScreen();
-            f.Controls.Add(gs);
+            CharacterScreen cs = new CharacterScreen();
+            f.Controls.Add(cs);
 
-            gs.Location = new Point((f.Width - gs.Width) / 2, (f.Height - gs.Height) / 2);
-            gs.Focus();
+            cs.Location = new Point((f.Width - cs.Width) / 2, (f.Height - cs.Height) / 2);
+            cs.Focus();
         }
 
         private void button2_Click(object sender, EventArgs e)
