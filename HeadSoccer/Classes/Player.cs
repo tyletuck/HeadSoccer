@@ -9,8 +9,8 @@ namespace HeadSoccer.Classes
 {
     public class Player
     {
-        public static int x, y, speed, width, height;
-        public static string direction;
+        public int x, y, speed, width, height;
+        public string direction;
         int jumpHeight = 40, counter = 1;
         bool flag = true;
 
@@ -26,15 +26,7 @@ namespace HeadSoccer.Classes
 
         public void PlayerMove(string _direction)
         {
-            if (_direction == "left")
-            {
-                x = x - speed;
-            }
-
-            if (_direction == "right")
-            {
-                y = y - speed;
-            }
+            
         }
 
         public void PlayerJump()
