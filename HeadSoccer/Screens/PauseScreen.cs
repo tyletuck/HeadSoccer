@@ -37,7 +37,7 @@ namespace HeadSoccer.Screens
 
         private static void ButtonClick(object sender, EventArgs e)
         {
-            Button btn = (Button)sender;
+            Button btn = (Button)sender; 
 
             switch (btn.Text)
             {
