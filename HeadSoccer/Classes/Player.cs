@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HeadSoccer.Classes
 {
-    class Player
+    public class Player
     {
         public static int x, y, speed, width, height;
         public static string direction;
