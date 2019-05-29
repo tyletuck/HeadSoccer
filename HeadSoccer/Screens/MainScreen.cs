@@ -22,11 +22,11 @@ namespace HeadSoccer.Screens
             Form f = this.FindForm();
             f.Controls.Remove(this);
 
-            GameScreen gs = new GameScreen();
-            f.Controls.Add(gs);
+            CharacterScreen cs = new CharacterScreen();
+            f.Controls.Add(cs);
 
-            gs.Location = new Point((f.Width - gs.Width) / 2, (f.Height - gs.Height) / 2);
-            gs.Focus();
+            cs.Location = new Point((f.Width - cs.Width) / 2, (f.Height - cs.Height) / 2);
+            cs.Focus();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -44,6 +44,7 @@ namespace HeadSoccer.Screens
             f.Controls.Add(ss);
 
             ss.Location = new Point((f.Width - ss.Width) / 2, (f.Height - ss.Height) / 2);
+            ss.Focus();
         }
 
         private void playButton_Enter(object sender, EventArgs e)

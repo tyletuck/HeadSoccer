@@ -23,17 +23,49 @@ namespace HeadSoccer.Screens
             InitializeComponent();
             GameTimer.Enabled = true;
 
-            Rectangle player1 = new Rectangle(200, this.Height - 160, 100, 160);
-            Rectangle player2 = new Rectangle(900, this.Height - 160, 100, 160);
+            Rectangle player1 = new Rectangle(88, 194, 100, 160);
+            Rectangle player2 = new Rectangle(893, 194, 100, 160);
 
             hitBox.Add(player1);
             hitBox.Add(player2);
 
-            Player p1 = new Player(100, 650, 5, "left");
-            Player p2 = new Player(this.Width - 100, 650,5,"right");
+            Player p1 = new Player(88, 194, 5, "left", 100, 160);
+            Player p2 = new Player(88, 194, 5, "right", 100, 160);
 
             Players.Add(p1);
             Players.Add(p2);
+
+            switch (CharacterScreen.rotation1)
+            {
+                case 1:
+                    Player1.BackgroundImage = Properties.Resources.Chufu_Cry_Head;
+                    break;
+                case 2:
+                    Player1.BackgroundImage = Properties.Resources.Cool_Cat_Head;
+                    break;
+                case 3:
+                    Player1.BackgroundImage = Properties.Resources.Ugly_Jaden_Head;
+                    break;
+                case 4:
+                    Player1.BackgroundImage = Properties.Resources.Thanos_Ouch_Head;
+                    break;
+            }
+
+            switch (CharacterScreen.rotation2)
+            {
+                case 1:
+                   Player2.BackgroundImage = Properties.Resources.Chufu_Cry_Head;
+                    break;
+               case 2:
+                  Player2.BackgroundImage = Properties.Resources.Cool_Cat_Head;
+                  break;
+                case 3:
+                   Player2.BackgroundImage = Properties.Resources.Ugly_Jaden_Head;
+                    break;
+                case 4:
+                   Player2.BackgroundImage = Properties.Resources.Thanos_Ouch_Head;
+                   break;
+            }
         }
 
         private void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -41,22 +73,22 @@ namespace HeadSoccer.Screens
             switch (e.KeyCode)
             {
                 case Keys.A:
-                    aDown = true;
+                    Players[1].PlayerMove("left");
                     break;
                   case Keys.D:
-                    dDown = true;
+                    Players[1].PlayerMove("right");
                     break;
                 case Keys.Left:
-                    leftDown = true;
+                    Players[0].PlayerMove("left");
                     break;
                 case Keys.Right:
-                    rightDown = true;
+                    Players[0].PlayerMove("right");
                     break;
                 case Keys.Space:
-                    spaceDown = true;
+                    Players[0].PlayerJump();
                     break;
                 case Keys.Z:
-                    zDown = true;
+                    Players[1].PlayerJump();
                     break;
             }
 
@@ -80,59 +112,7 @@ namespace HeadSoccer.Screens
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (aDown == true)
-            {
-                Players[1].PlayerMove("left");
-            }
-            if (dDown == true)
-            {
-                Players[1].PlayerMove("right");
-            }
-            if (zDown == true)
-            {
-                Players[1].PlayerJump();
-            }
-
-            if (leftDown == true)
-            {
-                Players[0].PlayerMove("left");
-            }
-            if (rightDown == true)
-            {
-                Players[0].PlayerMove("right");
-            }
-            if (spaceDown == true)
-            {
-                Players[0].PlayerJump();
-            }
-        }
-
-        private void GameScreen_KeyUp(object sender, KeyEventArgs e)
-        {
-            switch (e.KeyCode)
-            {
-                case Keys.Escape:
-                    escDown = false;
-                    break;
-                case Keys.A:
-                    aDown = false;
-                    break;
-                case Keys.D:
-                    dDown = false;
-                    break;
-                case Keys.Left:
-                    leftDown = false;
-                    break;
-                case Keys.Right:
-                    rightDown = false;
-                    break;
-                case Keys.Space:
-                    spaceDown = false;
-                    break;
-                case Keys.Z:
-                    zDown = false;
-                    break;
-            }
+           
         }
     }
 }

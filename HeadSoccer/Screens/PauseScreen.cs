@@ -37,7 +37,7 @@ namespace HeadSoccer.Screens
 
         private static void ButtonClick(object sender, EventArgs e)
         {
-            Button btn = (Button)sender;
+            Button btn = (Button)sender; 
 
             switch (btn.Text)
             {
@@ -64,6 +64,26 @@ namespace HeadSoccer.Screens
             buttonResult = DialogResult.Cancel;
             pauseForm.Close();
 
+        }
+
+        private void continueButton_Enter(object sender, EventArgs e)
+        {
+            continueButton.BackColor = Color.Red;
+        }
+
+        private void continueButton_Leave(object sender, EventArgs e)
+        {
+            continueButton.BackColor = Color.White;
+        }
+
+        private void exitButton_Enter(object sender, EventArgs e)
+        {
+            exitButton.BackColor = Color.Red;
+        }
+
+        private void exitButton_Leave(object sender, EventArgs e)
+        {   
+            exitButton.BackColor = Color.White;
         }
     }
 }
