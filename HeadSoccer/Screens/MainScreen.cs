@@ -44,6 +44,7 @@ namespace HeadSoccer.Screens
             f.Controls.Add(ss);
 
             ss.Location = new Point((f.Width - ss.Width) / 2, (f.Height - ss.Height) / 2);
+            ss.Focus();
         }
 
         private void playButton_Enter(object sender, EventArgs e)

@@ -3,37 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HeadSoccer.Screens;
 
 namespace HeadSoccer.Classes
 {
     public class Player
     {
         public int x, y, speed, width, height;
-        public string direction;
         int jumpHeight = 40, counter = 1;
         bool flag = true;
 
-        public Player(int _x, int _y, int _speed, string _direction, int _width, int _height)
+        public Player(int _x, int _y, int _speed, int _width, int _height)
         {
             x = _x;
             y = _y;
             speed = _speed;
-            direction = _direction;
             width = _width;
             height = _height;
-        }
-
-        public void PlayerMove(string _direction)
-        {
-            if (_direction == "left")
-            {
-                x = x - speed;
-            }
-
-            if (_direction == "right")
-            {
-                y = y - speed;
-            }
         }
 
         public void PlayerJump()
