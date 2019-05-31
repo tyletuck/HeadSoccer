@@ -43,7 +43,21 @@ namespace HeadSoccer.Classes
                     flag = true;
                 }
             }
+        }
 
+        public bool WallStop()
+        {
+            if (x <= 55)
+            {
+                return false;
+            }
+            else if (x >= 1045 - width)
+
+            {
+                return false;
+            }
+
+            return true;
         }
 
     }
