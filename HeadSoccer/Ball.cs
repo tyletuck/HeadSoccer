@@ -10,7 +10,7 @@ namespace HeadSoccer
 {
     public class Ball
     {
-        public int x, y, xSpeed, ySpeed;
+        public static int x, y, xSpeed, ySpeed;
 
         public Ball(int _x, int _y, int _xSpeed, int _ySpeed)
         {
@@ -20,9 +20,11 @@ namespace HeadSoccer
             _ySpeed = ySpeed;
         }
 
-        public void move(int b, int a)
+        public int Move(int x, int y, int b, int a)
         {
-            y = a*(x * x) + x + b;
+            y = (a*(x * x)) + x + b;
+            //y = 10 * (x * x);
+            return y;
         }
 
         public bool BallCollision(Player p)

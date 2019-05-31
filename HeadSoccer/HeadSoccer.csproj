@@ -160,5 +160,8 @@
   <ItemGroup>
     <None Include="Resources\Chufu Cry Head.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\football_PNG52789.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
