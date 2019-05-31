@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HeadSoccer.Screens;
+using System.Drawing;
 
 namespace HeadSoccer.Classes
 {
@@ -43,7 +44,22 @@ namespace HeadSoccer.Classes
                     flag = true;
                 }
             }
+        }
 
+        public bool WallStop()
+        {
+            if (x < 55)
+            {
+                x = 70;
+                return false;
+            }
+            else if (x > 1045 - width)
+            {
+                x = 1030- width;
+                return false;
+            }
+
+            return true;
         }
 
     }

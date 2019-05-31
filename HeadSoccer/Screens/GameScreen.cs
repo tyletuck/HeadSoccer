@@ -51,18 +51,12 @@ namespace HeadSoccer.Screens
         }
 
         List<Rectangle> hitBox = new List<Rectangle>();
-        List<Player> Players = new List<Player>();
+        public static  List<Player> Players = new List<Player>();
 
         public GameScreen()
         {
             InitializeComponent();
             GameTimer.Enabled = true;
-
-            Rectangle player1 = new Rectangle(88, 194, 100, 160);
-            Rectangle player2 = new Rectangle(893, 194, 100, 160);
-
-            hitBox.Add(player1);
-            hitBox.Add(player2);
 
             Player p1 = new Player(88, 200, 15, 100, 160);
             Player p2 = new Player(893, 200, 15, 100, 160);
@@ -118,20 +112,30 @@ namespace HeadSoccer.Screens
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (aDown == true)
+            Rectangle player1 = new Rectangle(Players[0].x, Players[0].y, Players[0].width, Players[0].height);
+            Rectangle player2 = new Rectangle(Players[1].x, Players[1].y, Players[1].width, Players[1].height);
+
+            if (player1.IntersectsWith(player2))
+            {
+                Players[0].x -= 20;
+                Players[1].x += 20;
+            }
+
+
+            if (aDown == true && Players[1].WallStop() == true)
             {
                 Players[1].x = Players[1].x - Players[1].speed;
             }
-            if (dDown == true)
+            if (dDown == true && Players[1].WallStop() == true)
             {
                 Players[1].x = Players[1].x + Players[1].speed;
             }
 
-            if (leftDown == true)
+            if (leftDown == true && Players[0].WallStop() == true)
             {
                 Players[0].x = Players[0].x - Players[0].speed;
             }
-            if (rightDown == true)
+            if (rightDown == true && Players[0].WallStop() == true)
             {
                 Players[0].x = Players[0].x + Players[0].speed;
             }
