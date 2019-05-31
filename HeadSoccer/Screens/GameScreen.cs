@@ -16,6 +16,11 @@ namespace HeadSoccer.Screens
     {
         bool runOnce = false;
         public static bool aDown, dDown, leftDown, rightDown, spaceDown, zDown;
+        int ballx = 525;
+        int bally = 460;
+        int ballxSpeed = 10;
+        int ballySpeed = 10;
+        Ball b;
 
         int i = 0;
        
@@ -64,6 +69,8 @@ namespace HeadSoccer.Screens
 
             Players.Add(p1);
             Players.Add(p2);
+
+            b = new Ball(ballx, bally, ballxSpeed, ballySpeed);
 
         }
 
@@ -129,10 +136,23 @@ namespace HeadSoccer.Screens
                 Players[0].x = Players[0].x + Players[0].speed;
             }
             Refresh();
+
+
+            if(b.BallCollision(Players[0]))
+            {
+                ballx += 5;
+            }
+
+            if (b.BallCollision(Players[1]))
+            {
+                ballx -= 5;
+            }
         }
 
         private void GameScreen_Paint(object sender, PaintEventArgs e)
         {
+
+            e.Graphics.DrawImage(Properties.Resources.Ball, ballx, bally, 50, 50);
 
                 switch (CharacterScreen.rotation1)
                 {
