@@ -11,6 +11,8 @@ namespace HeadSoccer
     public class Ball
     {
         public static int x, y, xSpeed, ySpeed;
+        public float velocityY;     // Velocity of the ball
+        float gravity = 0.5f;           // How strong is gravity
 
         public Ball(int _x, int _y, int _xSpeed, int _ySpeed)
         {
@@ -25,6 +27,18 @@ namespace HeadSoccer
             y = (a*(x * x)) + x + b;
             //y = 10 * (x * x);
             return y;
+        }
+
+        public void ballUpdate(float time)
+        {
+            velocityY += gravity * time;        // Apply gravity to vertical velocity
+            y += Convert.ToInt16(velocityY * time);      // Apply vertical velocity to X position
+
+            if (y > 200)
+            {
+                y = 200;
+                velocityY = 00;
+            }
         }
 
         public bool BallCollision(Player p)
