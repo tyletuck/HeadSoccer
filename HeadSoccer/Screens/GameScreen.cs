@@ -112,6 +112,8 @@ namespace HeadSoccer.Screens
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            Players[0].Update(5);
+            Players[1].Update(5);
             Rectangle player1 = new Rectangle(Players[0].x, Players[0].y, Players[0].width, Players[0].height);
             Rectangle player2 = new Rectangle(Players[1].x, Players[1].y, Players[1].width, Players[1].height);
 
@@ -139,18 +141,17 @@ namespace HeadSoccer.Screens
             {
                 Players[0].x = Players[0].x + Players[0].speed;
             }
+            if (spaceDown == true)
+            {
+                Players[0].y += Convert.ToInt16(Players[0].velocityY);
+                Players[0].OnJumpKeyPressed();
+            }
+            if (zDown == true)
+            {
+                Players[1].y += Convert.ToInt16(Players[0].velocityY);
+                Players[1].OnJumpKeyPressed();
+            }
             Refresh();
-
-
-            if(b.BallCollision(Players[0]))
-            {
-                ballx += 5;
-            }
-
-            if (b.BallCollision(Players[1]))
-            {
-                ballx -= 5;
-            }
         }
 
         private void GameScreen_Paint(object sender, PaintEventArgs e)
