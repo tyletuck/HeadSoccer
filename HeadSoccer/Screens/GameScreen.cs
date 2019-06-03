@@ -141,12 +141,12 @@ namespace HeadSoccer.Screens
             {
                 Players[0].x = Players[0].x + Players[0].speed;
             }
-            if (spaceDown == true)
+            if (spaceDown == true && Players[0].y >= 200)
             {
                 Players[0].y += Convert.ToInt16(Players[0].velocityY);
                 Players[0].OnJumpKeyPressed();
             }
-            if (zDown == true)
+            if (zDown == true && Players[1].y >= 200)
             {
                 Players[1].y += Convert.ToInt16(Players[0].velocityY);
                 Players[1].OnJumpKeyPressed();
