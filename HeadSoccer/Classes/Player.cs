@@ -4,62 +4,61 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HeadSoccer.Screens;
+using System.Drawing;
 
 namespace HeadSoccer.Classes
 {
     public class Player
-    {
-        public static int x, y, speed, width, height;
-        public static string direction;
+    {    
+       public float velocityY;     // Velocity of the character
+        float gravity = 0.5f;           // How strong is gravity
+        public int x, y, speed, width, height;
         int jumpHeight = 40, counter = 1;
-        bool flag = true;
+        bool onGround = false;
 
-        public Player(int _x, int _y, int _speed, string _direction, int _width, int _height)
+        public Player(int _x, int _y, int _speed, int _width, int _height)
         {
             x = _x;
             y = _y;
             speed = _speed;
-            direction = _direction;
             width = _width;
             height = _height;
         }
 
-        public void PlayerMove(string _direction)
+        public bool WallStop()
         {
-            if (_direction == "left")
+            if (x < 55)
             {
-                x = x - speed;
+                x = 70;
+                return false;
+            }
+            else if (x > 1045 - width)
+            {
+                x = 1030- width;
+                return false;
             }
 
-            if (_direction == "right")
+            return true;
+        }
+
+       public void Update(float time)
+        {
+            velocityY += gravity * time;        // Apply gravity to vertical velocity
+            y += Convert.ToInt16(velocityY * time);      // Apply vertical velocity to X position
+
+            if (y > 200)
             {
-                y = y - speed;
+                y = 200;
+                velocityY = 00;
+                onGround = true;
             }
         }
 
-        public void PlayerJump()
+       public void OnJumpKeyPressed()
         {
-            if (flag == true)
-            {
-                flag = false;
-
-                if (counter == 1)
-                {
-                    y = y + 15;
-                }
-
-                if (counter == 2)
-                {
-                    y = y + 25;
-                }
-
-                if (y >= 710)
-                {
-                    flag = true;
-                }
-            }
-
+            velocityY = -12.0f;   // Give a vertical boost to the players velocity to start jump
         }
+
 
     }
 }

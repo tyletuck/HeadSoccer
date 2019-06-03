@@ -14,81 +14,81 @@ namespace HeadSoccer.Screens
 {
     public partial class GameScreen : UserControl
     {
-        bool escDown = false, aDown, dDown, leftDown, rightDown,zDown, spaceDown;
+        bool runOnce = false;
+        public static bool aDown, dDown, leftDown, rightDown, spaceDown, zDown;
+        int ballx = 525;
+        int bally = 460;
+        int ballxSpeed = 10;
+        int ballySpeed = 10;
+        Ball b;
+
+        int i = 0;
+       
+
+        private void GameScreen_KeyUp(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.A:
+                    aDown = false;
+                    break;
+                case Keys.D:
+                    dDown = false;
+                    break;
+                case Keys.Left:
+                    leftDown = false;
+                    break;
+                case Keys.Right:
+                    rightDown = false;
+                    break;
+                case Keys.Space:
+                    spaceDown = false;
+                    break;
+                case Keys.Z:
+                    zDown = false;
+                    break;
+            }
+        }
+
         List<Rectangle> hitBox = new List<Rectangle>();
-        List<Player> Players = new List<Player>();
+        public static  List<Player> Players = new List<Player>();
 
         public GameScreen()
         {
             InitializeComponent();
             GameTimer.Enabled = true;
 
-            Rectangle player1 = new Rectangle(88, 194, 100, 160);
-            Rectangle player2 = new Rectangle(893, 194, 100, 160);
-
-            hitBox.Add(player1);
-            hitBox.Add(player2);
-
-            Player p1 = new Player(88, 194, 5, "left", 100, 160);
-            Player p2 = new Player(88, 194, 5, "right", 100, 160);
+            Player p1 = new Player(88, 200, 15, 100, 160);
+            Player p2 = new Player(893, 200, 15, 100, 160);
 
             Players.Add(p1);
             Players.Add(p2);
 
-            switch (CharacterScreen.rotation1)
-            {
-                case 1:
-                    Player1.BackgroundImage = Properties.Resources.Chufu_Cry_Head;
-                    break;
-                case 2:
-                    Player1.BackgroundImage = Properties.Resources.Cool_Cat_Head;
-                    break;
-                case 3:
-                    Player1.BackgroundImage = Properties.Resources.Ugly_Jaden_Head;
-                    break;
-                case 4:
-                    Player1.BackgroundImage = Properties.Resources.Thanos_Ouch_Head;
-                    break;
-            }
+            b = new Ball(ballx, bally, ballxSpeed, ballySpeed);
 
-            switch (CharacterScreen.rotation2)
-            {
-                case 1:
-                   Player2.BackgroundImage = Properties.Resources.Chufu_Cry_Head;
-                    break;
-               case 2:
-                  Player2.BackgroundImage = Properties.Resources.Cool_Cat_Head;
-                  break;
-                case 3:
-                   Player2.BackgroundImage = Properties.Resources.Ugly_Jaden_Head;
-                    break;
-                case 4:
-                   Player2.BackgroundImage = Properties.Resources.Thanos_Ouch_Head;
-                   break;
-            }
         }
 
-        private void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        public void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             switch (e.KeyCode)
             {
                 case Keys.A:
-                    Players[1].PlayerMove("left");
+                    aDown = true;
                     break;
                   case Keys.D:
-                    Players[1].PlayerMove("right");
+                    dDown = true;
                     break;
                 case Keys.Left:
-                    Players[0].PlayerMove("left");
+                    leftDown = true;
                     break;
                 case Keys.Right:
-                    Players[0].PlayerMove("right");
+                    rightDown = true;
                     break;
                 case Keys.Space:
-                    Players[0].PlayerJump();
+                    spaceDown = true;
                     break;
                 case Keys.Z:
-                    Players[1].PlayerJump();
+                    zDown = true;
                     break;
             }
 
@@ -112,7 +112,88 @@ namespace HeadSoccer.Screens
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-           
+            Players[0].Update(5);
+            Players[1].Update(5);
+            Rectangle player1 = new Rectangle(Players[0].x, Players[0].y, Players[0].width, Players[0].height);
+            Rectangle player2 = new Rectangle(Players[1].x, Players[1].y, Players[1].width, Players[1].height);
+
+            if (player1.IntersectsWith(player2))
+            {
+                Players[0].x -= 20;
+                Players[1].x += 20;
+            }
+
+
+            if (aDown == true && Players[1].WallStop() == true)
+            {
+                Players[1].x = Players[1].x - Players[1].speed;
+            }
+            if (dDown == true && Players[1].WallStop() == true)
+            {
+                Players[1].x = Players[1].x + Players[1].speed;
+            }
+
+            if (leftDown == true && Players[0].WallStop() == true)
+            {
+                Players[0].x = Players[0].x - Players[0].speed;
+            }
+            if (rightDown == true && Players[0].WallStop() == true)
+            {
+                Players[0].x = Players[0].x + Players[0].speed;
+            }
+            if (spaceDown == true && Players[0].y >= 200)
+            {
+                Players[0].y += Convert.ToInt16(Players[0].velocityY);
+                Players[0].OnJumpKeyPressed();
+            }
+            if (zDown == true && Players[1].y >= 200)
+            {
+                Players[1].y += Convert.ToInt16(Players[0].velocityY);
+                Players[1].OnJumpKeyPressed();
+            }
+            Refresh();
+        }
+
+        private void GameScreen_Paint(object sender, PaintEventArgs e)
+        {
+
+            e.Graphics.DrawImage(Properties.Resources.Ball, ballx, bally, 50, 50);
+
+                switch (CharacterScreen.rotation1)
+                {
+                    case 1:
+                        e.Graphics.DrawImage(Properties.Resources.Chufu_Cry_Head, Players[0].x, Players[0].y, 105, 325);
+                        break;
+                    case 2:
+                        e.Graphics.DrawImage(Properties.Resources.Cool_Cat_Head, Players[0].x, Players[0].y, 105, 325);
+                        break;
+                    case 3:
+                        e.Graphics.DrawImage(Properties.Resources.Ugly_Jaden_Head, Players[0].x, Players[0].y, 105, 325);
+                        break;
+                    case 4:
+                        e.Graphics.DrawImage(Properties.Resources.Thanos_Ouch_Head, Players[0].x, Players[0].y, 105, 325);
+                        break;
+                }
+
+                switch (CharacterScreen.rotation2)
+                {
+                    case 1:
+                        e.Graphics.DrawImage(Properties.Resources.Chufu_Cry_Head, Players[1].x, Players[1].y, 105, 325);
+                    
+                        break;
+                    case 2:
+                        e.Graphics.DrawImage(Properties.Resources.Cool_Cat_Head, Players[1].x, Players[1].y, 105, 325);
+                        break;
+                    case 3:
+                        e.Graphics.DrawImage(Properties.Resources.Ugly_Jaden_Head, Players[1].x, Players[1].y, 105, 325);
+                        break;
+                    case 4:
+                        e.Graphics.DrawImage(Properties.Resources.Thanos_Ouch_Head, Players[1].x, Players[1].y, 105, 325);
+                        break;
+                }
+            
+
+            
         }
     }
 }
