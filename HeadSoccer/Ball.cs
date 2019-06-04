@@ -16,17 +16,10 @@ namespace HeadSoccer
 
         public Ball(int _x, int _y, int _xSpeed, int _ySpeed)
         {
-            _x = x;
-            _y = y;
-            _xSpeed = xSpeed;
-            _ySpeed = ySpeed;
-        }
-
-        public int Move(int x, int y, int b, int a)
-        {
-            y = (a*(x * x)) + x + b;
-            //y = 10 * (x * x);
-            return y;
+            x = _x;
+            y = _y;
+            xSpeed = _xSpeed;
+            ySpeed = _ySpeed;
         }
 
         public void ballUpdate(float time)
@@ -41,6 +34,11 @@ namespace HeadSoccer
             }
         }
 
+        public void OnHit()
+        {
+            velocityY = -12.0f;   // Give a vertical boost to the balls velocity to start
+        }
+
         public bool BallCollision(Player p)
         {
             Rectangle playerRec = new Rectangle(p.x, p.y, p.width, p.height);
@@ -48,10 +46,12 @@ namespace HeadSoccer
 
             if (ballRec.IntersectsWith(playerRec))
             {
-                return ballRec.IntersectsWith(playerRec);
+                return true;
             }
-
-            return ballRec.IntersectsWith(ballRec);
+            else
+            {
+                return false;
+            }
         }
 
         public bool BallCollision()

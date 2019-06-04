@@ -114,15 +114,27 @@ namespace HeadSoccer.Screens
         {
             Players[0].Update(5);
             Players[1].Update(5);
+            b.ballUpdate(5);
             Rectangle player1 = new Rectangle(Players[0].x, Players[0].y, Players[0].width, Players[0].height);
             Rectangle player2 = new Rectangle(Players[1].x, Players[1].y, Players[1].width, Players[1].height);
+
+            if(b.BallCollision(Players[0]) == true)
+            {
+                bally += Convert.ToInt16(b.velocityY);
+                b.OnHit();
+            }
+
+            if (b.BallCollision(Players[1]) == true)
+            {
+                bally += Convert.ToInt16(b.velocityY);
+                b.OnHit();
+            }
 
             if (player1.IntersectsWith(player2))
             {
                 Players[0].x -= 20;
                 Players[1].x += 20;
             }
-
 
             if (aDown == true && Players[1].WallStop() == true)
             {
@@ -162,33 +174,33 @@ namespace HeadSoccer.Screens
                 switch (CharacterScreen.rotation1)
                 {
                     case 1:
-                        e.Graphics.DrawImage(Properties.Resources.Chufu_Cry_Head, Players[0].x, Players[0].y, 105, 325);
+                        e.Graphics.DrawImage(Properties.Resources.Chufu_Cry_Head, Players[0].x, Players[0].y, 99, 325);
                         break;
                     case 2:
-                        e.Graphics.DrawImage(Properties.Resources.Cool_Cat_Head, Players[0].x, Players[0].y, 105, 325);
+                        e.Graphics.DrawImage(Properties.Resources.Cool_Cat_Head, Players[0].x, Players[0].y, 99, 325);
                         break;
                     case 3:
-                        e.Graphics.DrawImage(Properties.Resources.Ugly_Jaden_Head, Players[0].x, Players[0].y, 105, 325);
+                        e.Graphics.DrawImage(Properties.Resources.Ugly_Jaden_Head, Players[0].x, Players[0].y, 99, 325);
                         break;
                     case 4:
-                        e.Graphics.DrawImage(Properties.Resources.Thanos_Ouch_Head, Players[0].x, Players[0].y, 105, 325);
+                        e.Graphics.DrawImage(Properties.Resources.Thanos_Ouch_Head, Players[0].x, Players[0].y, 99, 325);
                         break;
                 }
 
                 switch (CharacterScreen.rotation2)
                 {
                     case 1:
-                        e.Graphics.DrawImage(Properties.Resources.Chufu_Cry_Head, Players[1].x, Players[1].y, 105, 325);
+                        e.Graphics.DrawImage(Properties.Resources.Chufu_Cry_Head, Players[1].x, Players[1].y, 99, 325);
                     
                         break;
                     case 2:
-                        e.Graphics.DrawImage(Properties.Resources.Cool_Cat_Head, Players[1].x, Players[1].y, 105, 325);
+                        e.Graphics.DrawImage(Properties.Resources.Cool_Cat_Head, Players[1].x, Players[1].y, 99, 325);
                         break;
                     case 3:
-                        e.Graphics.DrawImage(Properties.Resources.Ugly_Jaden_Head, Players[1].x, Players[1].y, 105, 325);
+                        e.Graphics.DrawImage(Properties.Resources.Ugly_Jaden_Head, Players[1].x, Players[1].y, 99, 325);
                         break;
                     case 4:
-                        e.Graphics.DrawImage(Properties.Resources.Thanos_Ouch_Head, Players[1].x, Players[1].y, 105, 325);
+                        e.Graphics.DrawImage(Properties.Resources.Thanos_Ouch_Head, Players[1].x, Players[1].y, 99, 325);
                         break;
                 }
             
