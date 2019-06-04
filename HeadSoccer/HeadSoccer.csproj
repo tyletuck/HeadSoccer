@@ -131,9 +131,6 @@
     <None Include="Resources\Ball.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Cool Cat Head.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\Goal.png" />
   </ItemGroup>
   <ItemGroup>
@@ -149,19 +146,22 @@
     <None Include="Resources\Stadium.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Soccer_Ball_PNG_Clip_Art-1361.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\football_PNG52789.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cool Cat Head.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\Thanos Ouch Head.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Ugly Jaden Head.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Soccer_Ball_PNG_Clip_Art-1361.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\Chufu Cry Head.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\football_PNG52789.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
