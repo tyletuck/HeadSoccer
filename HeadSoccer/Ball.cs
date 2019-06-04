@@ -26,10 +26,11 @@ namespace HeadSoccer
         {
             velocityY += gravity * time;        // Apply gravity to vertical velocity
             y += Convert.ToInt16(velocityY * time);      // Apply vertical velocity to X position
+            
 
-            if (y > 200)
+            if (y > 460)
             {
-                y = 200;
+                y = 460;
                 velocityY = 00;
             }
         }

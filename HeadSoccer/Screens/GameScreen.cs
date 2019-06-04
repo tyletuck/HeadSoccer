@@ -18,8 +18,8 @@ namespace HeadSoccer.Screens
         public static bool aDown, dDown, leftDown, rightDown, spaceDown, zDown;
         int ballx = 525;
         int bally = 460;
-        int ballxSpeed = 10;
-        int ballySpeed = 10;
+        int ballxSpeed = 30;
+        int ballySpeed = 30;
         Ball b;
 
         int i = 0;
@@ -114,7 +114,7 @@ namespace HeadSoccer.Screens
         {
             Players[0].Update(5);
             Players[1].Update(5);
-            b.ballUpdate(5);
+            b.ballUpdate(2);
             Rectangle player1 = new Rectangle(Players[0].x, Players[0].y, Players[0].width, Players[0].height);
             Rectangle player2 = new Rectangle(Players[1].x, Players[1].y, Players[1].width, Players[1].height);
 
