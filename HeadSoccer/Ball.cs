@@ -11,20 +11,32 @@ namespace HeadSoccer
     public class Ball
     {
         public static int x, y, xSpeed, ySpeed;
+        public float velocityY;     // Velocity of the ball
+        float gravity = 0.5f;           // How strong is gravity
 
         public Ball(int _x, int _y, int _xSpeed, int _ySpeed)
         {
-            _x = x;
-            _y = y;
-            _xSpeed = xSpeed;
-            _ySpeed = ySpeed;
+            x = _x;
+            y = _y;
+            xSpeed = _xSpeed;
+            ySpeed = _ySpeed;
         }
 
-        public int Move(int x, int y, int b, int a)
+        public void ballUpdate(float time)
         {
-            y = (a*(x * x)) + x + b;
-            //y = 10 * (x * x);
-            return y;
+            velocityY += gravity * time;        // Apply gravity to vertical velocity
+            y += Convert.ToInt16(velocityY * time);      // Apply vertical velocity to X position
+
+            if (y > 200)
+            {
+                y = 200;
+                velocityY = 00;
+            }
+        }
+
+        public void OnHit()
+        {
+            velocityY = -12.0f;   // Give a vertical boost to the balls velocity to start
         }
 
         public bool BallCollision(Player p)
@@ -34,10 +46,12 @@ namespace HeadSoccer
 
             if (ballRec.IntersectsWith(playerRec))
             {
-                return ballRec.IntersectsWith(playerRec);
+                return true;
             }
-
-            return ballRec.IntersectsWith(ballRec);
+            else
+            {
+                return false;
+            }
         }
 
         public bool BallCollision()
