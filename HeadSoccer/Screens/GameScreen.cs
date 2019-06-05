@@ -58,8 +58,8 @@ namespace HeadSoccer.Screens
             InitializeComponent();
             GameTimer.Enabled = true;
 
-            Player p1 = new Player(88, 200, 15, 100, 160);
-            Player p2 = new Player(893, 200, 15, 100, 160);
+            Player p1 = new Player(88, 320, 15, 80, 170);
+            Player p2 = new Player(893, 320, 15, 80, 170);
 
             Players.Add(p1);
             Players.Add(p2);
@@ -114,7 +114,9 @@ namespace HeadSoccer.Screens
         {
             Players[0].Update(5);
             Players[1].Update(5);
-            b.ballUpdate(2);
+
+            b.ballUpdate(1);
+
             Rectangle player1 = new Rectangle(Players[0].x, Players[0].y, Players[0].width, Players[0].height);
             Rectangle player2 = new Rectangle(Players[1].x, Players[1].y, Players[1].width, Players[1].height);
 
@@ -153,12 +155,12 @@ namespace HeadSoccer.Screens
             {
                 Players[0].x = Players[0].x + Players[0].speed;
             }
-            if (spaceDown == true && Players[0].y >= 200)
+            if (spaceDown == true && Players[0].y >= 300)
             {
                 Players[0].y += Convert.ToInt16(Players[0].velocityY);
                 Players[0].OnJumpKeyPressed();
             }
-            if (zDown == true && Players[1].y >= 200)
+            if (zDown == true && Players[1].y >= 300)
             {
                 Players[1].y += Convert.ToInt16(Players[0].velocityY);
                 Players[1].OnJumpKeyPressed();
@@ -174,33 +176,33 @@ namespace HeadSoccer.Screens
                 switch (CharacterScreen.rotation1)
                 {
                     case 1:
-                        e.Graphics.DrawImage(Properties.Resources.Chufu_Cry_Head, Players[0].x, Players[0].y, 99, 325);
+                        e.Graphics.DrawImage(Properties.Resources.Chufu_Cry_Head, Players[0].x, Players[0].y, 79, 170);
                         break;
                     case 2:
-                        e.Graphics.DrawImage(Properties.Resources.Cool_Cat_Head, Players[0].x, Players[0].y, 99, 325);
+                        e.Graphics.DrawImage(Properties.Resources.Cool_Cat_Head, Players[0].x, Players[0].y, 79, 170);
                         break;
                     case 3:
-                        e.Graphics.DrawImage(Properties.Resources.Ugly_Jaden_Head, Players[0].x, Players[0].y, 99, 325);
+                        e.Graphics.DrawImage(Properties.Resources.Ugly_Jaden_Head, Players[0].x, Players[0].y, 79, 170);
                         break;
                     case 4:
-                        e.Graphics.DrawImage(Properties.Resources.Thanos_Ouch_Head, Players[0].x, Players[0].y, 99, 325);
+                        e.Graphics.DrawImage(Properties.Resources.Thanos_Ouch_Head, Players[0].x, Players[0].y, 79, 170);
                         break;
                 }
 
                 switch (CharacterScreen.rotation2)
                 {
                     case 1:
-                        e.Graphics.DrawImage(Properties.Resources.Chufu_Cry_Head, Players[1].x, Players[1].y, 99, 325);
+                        e.Graphics.DrawImage(Properties.Resources.Chufu_Cry_Head, Players[1].x, Players[1].y, 79, 170);
                     
                         break;
                     case 2:
-                        e.Graphics.DrawImage(Properties.Resources.Cool_Cat_Head, Players[1].x, Players[1].y, 99, 325);
+                        e.Graphics.DrawImage(Properties.Resources.Cool_Cat_Head, Players[1].x, Players[1].y, 79, 170);
                         break;
                     case 3:
-                        e.Graphics.DrawImage(Properties.Resources.Ugly_Jaden_Head, Players[1].x, Players[1].y, 99, 325);
+                        e.Graphics.DrawImage(Properties.Resources.Ugly_Jaden_Head, Players[1].x, Players[1].y, 79, 170);
                         break;
                     case 4:
-                        e.Graphics.DrawImage(Properties.Resources.Thanos_Ouch_Head, Players[1].x, Players[1].y, 99, 325);
+                        e.Graphics.DrawImage(Properties.Resources.Thanos_Ouch_Head, Players[1].x, Players[1].y, 79, 170);
                         break;
                 }
             

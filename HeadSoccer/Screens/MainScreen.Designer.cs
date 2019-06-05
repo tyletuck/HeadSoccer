@@ -104,9 +104,10 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.BackgroundImage = global::HeadSoccer.Properties.Resources.Thanos_Ouch_Head;
-            this.pictureBox1.Location = new System.Drawing.Point(649, 192);
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox1.Location = new System.Drawing.Point(649, 326);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(105, 325);
+            this.pictureBox1.Size = new System.Drawing.Size(86, 211);
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             // 

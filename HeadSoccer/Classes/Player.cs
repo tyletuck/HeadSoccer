@@ -13,7 +13,6 @@ namespace HeadSoccer.Classes
        public float velocityY;     // Velocity of the character
         float gravity = 0.5f;           // How strong is gravity
         public int x, y, speed, width, height;
-        int jumpHeight = 40, counter = 1;
         bool onGround = false;
 
         public Player(int _x, int _y, int _speed, int _width, int _height)
@@ -46,9 +45,9 @@ namespace HeadSoccer.Classes
             velocityY += gravity * time;        // Apply gravity to vertical velocity
             y += Convert.ToInt16(velocityY * time);      // Apply vertical velocity to X position
 
-            if (y > 200)
+            if (y > 320)
             {
-                y = 200;
+                y = 320;
                 velocityY = 00;
                 onGround = true;
             }

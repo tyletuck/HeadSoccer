@@ -41,10 +41,10 @@
             // 
             this.Char1.BackColor = System.Drawing.Color.Transparent;
             this.Char1.BackgroundImage = global::HeadSoccer.Properties.Resources.Chufu_Cry_Head;
-            this.Char1.Location = new System.Drawing.Point(257, 132);
+            this.Char1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.Char1.Location = new System.Drawing.Point(256, 281);
             this.Char1.Name = "Char1";
-            this.Char1.Size = new System.Drawing.Size(120, 325);
-            this.Char1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.Char1.Size = new System.Drawing.Size(120, 167);
             this.Char1.TabIndex = 0;
             this.Char1.TabStop = false;
             // 
@@ -52,10 +52,10 @@
             // 
             this.Char2.BackColor = System.Drawing.Color.Transparent;
             this.Char2.BackgroundImage = global::HeadSoccer.Properties.Resources.Chufu_Cry_Head;
-            this.Char2.Location = new System.Drawing.Point(721, 132);
+            this.Char2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.Char2.Location = new System.Drawing.Point(727, 281);
             this.Char2.Name = "Char2";
-            this.Char2.Size = new System.Drawing.Size(120, 325);
-            this.Char2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.Char2.Size = new System.Drawing.Size(120, 165);
             this.Char2.TabIndex = 1;
             this.Char2.TabStop = false;
             // 
