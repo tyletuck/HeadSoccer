@@ -16,11 +16,10 @@ namespace HeadSoccer.Screens
     {
         bool runOnce = false;
         public static bool aDown, dDown, leftDown, rightDown, spaceDown, zDown;
-        int ballx = 525;
-        int bally = 460;
+        //int ballx = 525;
+       // int bally = 460;
         int ballxSpeed = 30;
         int ballySpeed = 30;
-        Ball b;
 
         int i = 0;
        
@@ -52,6 +51,7 @@ namespace HeadSoccer.Screens
 
         List<Rectangle> hitBox = new List<Rectangle>();
         public static  List<Player> Players = new List<Player>();
+        public static List<Ball> Balls = new List<Ball>();
 
         public GameScreen()
         {
@@ -61,10 +61,11 @@ namespace HeadSoccer.Screens
             Player p1 = new Player(88, 320, 15, 80, 170);
             Player p2 = new Player(893, 320, 15, 80, 170);
 
-            Players.Add(p1);
-            Players.Add(p2);
+            Ball b = new Ball(525, 460, ballxSpeed, ballySpeed);
 
-            b = new Ball(ballx, bally, ballxSpeed, ballySpeed);
+            Players.Add(p1);
+            Players.Add(p2);;
+            Balls.Add(b);
 
         }
 
@@ -112,24 +113,26 @@ namespace HeadSoccer.Screens
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+
             Players[0].Update(5);
             Players[1].Update(5);
 
-            b.ballUpdate(1);
+            Balls[0].ballUpdate(5);
 
             Rectangle player1 = new Rectangle(Players[0].x, Players[0].y, Players[0].width, Players[0].height);
             Rectangle player2 = new Rectangle(Players[1].x, Players[1].y, Players[1].width, Players[1].height);
 
-            if(b.BallCollision(Players[0]) == true)
+
+            if (Balls[0].BallCollision(Players[0]) == true)
             {
-                bally += Convert.ToInt16(b.velocityY);
-                b.OnHit();
+                Balls[0].y += Convert.ToInt16(Balls[0].velocityY);
+                Balls[0].OnHit();
             }
 
-            if (b.BallCollision(Players[1]) == true)
+            if (Balls[0].BallCollision(Players[1]) == true)
             {
-                bally += Convert.ToInt16(b.velocityY);
-                b.OnHit();
+                Balls[0].y += Convert.ToInt16(Balls[0].velocityY);
+                Balls[0].OnHit();
             }
 
             if (player1.IntersectsWith(player2))
@@ -171,7 +174,7 @@ namespace HeadSoccer.Screens
         private void GameScreen_Paint(object sender, PaintEventArgs e)
         {
 
-            e.Graphics.DrawImage(Properties.Resources.Ball, ballx, bally, 50, 50);
+            e.Graphics.DrawImage(Properties.Resources.Ball, Balls[0].x, Balls[0].y, 50, 50);
 
                 switch (CharacterScreen.rotation1)
                 {

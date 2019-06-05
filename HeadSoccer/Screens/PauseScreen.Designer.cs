@@ -69,18 +69,20 @@
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImage = global::HeadSoccer.Properties.Resources.Ugly_Jaden_Head;
-            this.pictureBox1.Location = new System.Drawing.Point(38, 37);
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox1.Location = new System.Drawing.Point(95, 78);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(128, 311);
+            this.pictureBox1.Size = new System.Drawing.Size(86, 189);
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
             // pictureBox2
             // 
             this.pictureBox2.BackgroundImage = global::HeadSoccer.Properties.Resources.Cool_Cat_Head;
-            this.pictureBox2.Location = new System.Drawing.Point(187, 37);
+            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox2.Location = new System.Drawing.Point(214, 93);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(128, 311);
+            this.pictureBox2.Size = new System.Drawing.Size(111, 174);
             this.pictureBox2.TabIndex = 3;
             this.pictureBox2.TabStop = false;
             // 
