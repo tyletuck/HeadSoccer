@@ -163,5 +163,14 @@
   <ItemGroup>
     <None Include="Resources\Chufu Cry Head.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ball kick Sound Effect.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Crowd cheer sound effect.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Jump Sound Effects All Sounds.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
