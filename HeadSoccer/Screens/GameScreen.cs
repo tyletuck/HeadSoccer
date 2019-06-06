@@ -14,15 +14,10 @@ namespace HeadSoccer.Screens
 {
     public partial class GameScreen : UserControl
     {
-        bool runOnce = false;
         public static bool aDown, dDown, leftDown, rightDown, spaceDown, zDown;
-        //int ballx = 525;
-       // int bally = 460;
         int ballxSpeed = 30;
         int ballySpeed = 30;
-
-        int i = 0;
-       
+        int p1Score = 0, p2Score = 0;
 
         private void GameScreen_KeyUp(object sender, KeyEventArgs e)
         {
@@ -61,12 +56,11 @@ namespace HeadSoccer.Screens
             Player p1 = new Player(88, 320, 15, 80, 170);
             Player p2 = new Player(893, 320, 15, 80, 170);
 
-            Ball b = new Ball(525, 460, ballxSpeed, ballySpeed);
+            Ball b = new Ball(525, 200, ballxSpeed, ballySpeed);
 
             Players.Add(p1);
             Players.Add(p2);;
             Balls.Add(b);
-
         }
 
         public void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -122,19 +116,36 @@ namespace HeadSoccer.Screens
             Rectangle player1 = new Rectangle(Players[0].x, Players[0].y, Players[0].width, Players[0].height);
             Rectangle player2 = new Rectangle(Players[1].x, Players[1].y, Players[1].width, Players[1].height);
 
+            #region Ball
 
             if (Balls[0].BallCollision(Players[0]) == true)
             {
                 Balls[0].y += Convert.ToInt16(Balls[0].velocityY);
                 Balls[0].OnHit();
+                Balls[0].Horizontal(Players[0]);
             }
 
             if (Balls[0].BallCollision(Players[1]) == true)
             {
                 Balls[0].y += Convert.ToInt16(Balls[0].velocityY);
                 Balls[0].OnHit();
+                Balls[0].Horizontal(Players[1]);
             }
 
+            switch (Balls[0].BallCollisonNet())
+            {
+                case 0:
+                    break;
+                case 1:
+                    p1Score++;
+                    break;
+                case 2:
+                    p2Score++;
+                    break;
+            }
+            #endregion
+
+            #region Player
             if (player1.IntersectsWith(player2))
             {
                 Players[0].x -= 20;
@@ -168,6 +179,7 @@ namespace HeadSoccer.Screens
                 Players[1].y += Convert.ToInt16(Players[0].velocityY);
                 Players[1].OnJumpKeyPressed();
             }
+            #endregion
             Refresh();
         }
 

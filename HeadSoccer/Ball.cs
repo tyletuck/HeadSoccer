@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using HeadSoccer.Classes;
+using HeadSoccer.Screens;
 
 namespace HeadSoccer
 {
@@ -13,6 +14,8 @@ namespace HeadSoccer
         public int x, y, xSpeed, ySpeed;
         public float velocityY;     // Velocity of the ball
         float gravity = 0.5f;           // How strong is gravity
+        bool grounded = false;
+        int direction = 0;
 
         public Ball(int _x, int _y, int _xSpeed, int _ySpeed)
         {
@@ -20,6 +23,20 @@ namespace HeadSoccer
             y = _y;
             xSpeed = _xSpeed;
             ySpeed = _ySpeed;
+        }
+
+        public void Horizontal(Player p)
+        {
+            if (p.x > x)
+            {
+                direction = 1;
+                grounded = false;
+            }
+            else if (p.x < x)
+            {
+                direction = 2;
+                grounded = false;
+            }
         }
 
         public void ballUpdate(float time)
@@ -31,6 +48,15 @@ namespace HeadSoccer
             {
                 y = 460;
                 velocityY = 00;
+            }
+
+            if (grounded == false && direction == 2)
+            {
+                x += xSpeed;
+            }
+            if (grounded == false && direction == 1)
+            {
+                x -= xSpeed;
             }
         }
 
@@ -97,24 +123,24 @@ namespace HeadSoccer
             return ballRec.IntersectsWith(ballRec);
         }
 
-        public bool BallCollisonNet()
+        public int BallCollisonNet()
         {
             Rectangle ballRec = new Rectangle(x, y, 50, 50);
-            Rectangle rNetRec = new Rectangle(x, y, 85, 250);
-            Rectangle lNetRec = new Rectangle(1090, 250, 85, 250);
+            Rectangle rNetRec = new Rectangle(0, 250, 85, 250);
+            Rectangle lNetRec = new Rectangle(1106 - 85, 250, 85, 250);
 
 
             if (ballRec.IntersectsWith(rNetRec))
             {
-                return ballRec.IntersectsWith(rNetRec);
+                return 1;
             }
 
             if (ballRec.IntersectsWith(lNetRec))
             {
-                return ballRec.IntersectsWith(lNetRec);
+                return 2;
             }
 
-            return ballRec.IntersectsWith(ballRec);
+            return 0;
         }
     }
 }
