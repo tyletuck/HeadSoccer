@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
 using HeadSoccer.Classes;
+using System.Diagnostics;
 
 namespace HeadSoccer.Screens
 {
@@ -47,6 +48,8 @@ namespace HeadSoccer.Screens
         List<Rectangle> hitBox = new List<Rectangle>();
         public static  List<Player> Players = new List<Player>();
         public static List<Ball> Balls = new List<Ball>();
+
+        Stopwatch scoreWatch = new Stopwatch();
 
         public GameScreen()
         {
@@ -105,8 +108,25 @@ namespace HeadSoccer.Screens
             }
         }
 
+        public void GameReset()
+        {
+            scoreWatch.Reset();
+            goalBox.Visible = false;
+
+            Balls[0].x = 525;
+            Balls[0].y = 200;
+            Balls[0].direction = 0;
+
+            Players[0].x = 88;
+            Players[1].x = 893;
+        }
+
         private void timer1_Tick(object sender, EventArgs e)
         {
+            if (scoreWatch.ElapsedMilliseconds >= 3000)
+            {
+                GameReset();
+            }
 
             Players[0].Update(5);
             Players[1].Update(5);
@@ -137,11 +157,24 @@ namespace HeadSoccer.Screens
                 case 0:
                     break;
                 case 1:
+                    scoreWatch.Restart();
+                    goalBox.Visible = true;
                     p1Score++;
                     break;
                 case 2:
+                    scoreWatch.Restart();
+                    goalBox.Visible = true;
                     p2Score++;
                     break;
+            }
+
+            if (Balls[0].BallCollision() == true)
+            {
+                Balls[0].xSpeed *= -1;
+            }
+            if (Balls[0].topCollision() == true)
+            {
+                Balls[0].velocityY *= -1;
             }
             #endregion
 

@@ -15,7 +15,7 @@ namespace HeadSoccer
         public float velocityY;     // Velocity of the ball
         float gravity = 0.5f;           // How strong is gravity
         bool grounded = false;
-        int direction = 0;
+       public int direction = 0;
 
         public Ball(int _x, int _y, int _xSpeed, int _ySpeed)
         {
@@ -62,7 +62,7 @@ namespace HeadSoccer
 
         public void OnHit()
         {
-            velocityY = -12.0f;   // Give a vertical boost to the balls velocity to start
+            velocityY = -18.0f;   // Give a vertical boost to the balls velocity to start
         }
 
         public bool BallCollision(Player p)
@@ -80,47 +80,45 @@ namespace HeadSoccer
             }
         }
 
-        public bool BallCollision()
+        public bool topCollision()
         {
             Rectangle ballRec = new Rectangle(x, y, 50, 50);
-            Rectangle floorRec = new Rectangle(0, 495, 1106, 495);
-            Rectangle roofRec = new Rectangle(0, 0, 1106, 4);
-            Rectangle rWallRec = new Rectangle(1103, 0, 4, 280);
-            Rectangle lWallRec = new Rectangle(0, 0, 4, 280);
-            Rectangle topNet1 = new Rectangle(0, 240, 80, 6);
-            Rectangle topNet2 = new Rectangle(1103, 240, 80, 6);
-
-            if (ballRec.IntersectsWith(floorRec))
-            {
-                return ballRec.IntersectsWith(floorRec);
-            }
+            Rectangle topNet1 = new Rectangle(0, 240, 100, 6);
+            Rectangle topNet2 = new Rectangle(1003, 240, 100, 6);
+            Rectangle roofRec = new Rectangle(0, 0, 1106, 2);
 
             if (ballRec.IntersectsWith(roofRec))
             {
-                return ballRec.IntersectsWith(roofRec);
+                return true;
             }
+            if (ballRec.IntersectsWith(topNet1))
+            {
+                return true;
+            }
+            if (ballRec.IntersectsWith(topNet2))
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool BallCollision()
+        {
+            Rectangle ballRec = new Rectangle(x, y, 50, 50);
+            Rectangle rWallRec = new Rectangle(1103, 0, 4, 280);
+            Rectangle lWallRec = new Rectangle(0, 0, 4, 280);
+
 
             if (ballRec.IntersectsWith(rWallRec))
             {
-                return ballRec.IntersectsWith(rWallRec);
+                return true;
             }
 
             if (ballRec.IntersectsWith(lWallRec))
             {
-                return ballRec.IntersectsWith(lWallRec);
+                return true;
             }
 
-            if (ballRec.IntersectsWith(topNet1))
-            {
-                return ballRec.IntersectsWith(topNet1);
-            }
-
-            if (ballRec.IntersectsWith(topNet2))
-            {
-                return ballRec.IntersectsWith(topNet2);
-            }
-
-            return ballRec.IntersectsWith(ballRec);
+            return false;
         }
 
         public int BallCollisonNet()

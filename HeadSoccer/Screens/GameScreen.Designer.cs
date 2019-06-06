@@ -31,11 +31,26 @@
             this.components = new System.ComponentModel.Container();
             this.GameTimer = new System.Windows.Forms.Timer(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.goalBox = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.goalBox)).BeginInit();
             this.SuspendLayout();
             // 
             // GameTimer
             // 
             this.GameTimer.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // goalBox
+            // 
+            this.goalBox.BackColor = System.Drawing.Color.Transparent;
+            this.goalBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.goalBox.Image = global::HeadSoccer.Properties.Resources.Goal;
+            this.goalBox.Location = new System.Drawing.Point(246, 28);
+            this.goalBox.Name = "goalBox";
+            this.goalBox.Size = new System.Drawing.Size(602, 279);
+            this.goalBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.goalBox.TabIndex = 0;
+            this.goalBox.TabStop = false;
+            this.goalBox.Visible = false;
             // 
             // GameScreen
             // 
@@ -43,12 +58,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightPink;
             this.BackgroundImage = global::HeadSoccer.Properties.Resources.Stadium;
+            this.Controls.Add(this.goalBox);
             this.DoubleBuffered = true;
             this.Name = "GameScreen";
             this.Size = new System.Drawing.Size(1106, 720);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.GameScreen_Paint);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.GameScreen_KeyUp);
             this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.GameScreen_PreviewKeyDown);
+            ((System.ComponentModel.ISupportInitialize)(this.goalBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -57,5 +74,6 @@
 
         private System.Windows.Forms.Timer GameTimer;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.PictureBox goalBox;
     }
 }
