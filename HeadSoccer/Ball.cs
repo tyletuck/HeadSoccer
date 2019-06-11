@@ -84,7 +84,7 @@ namespace HeadSoccer
         {
             Rectangle ballRec = new Rectangle(x, y, 50, 50);
             Rectangle topNet1 = new Rectangle(0, 240, 100, 6);
-            Rectangle topNet2 = new Rectangle(1003, 240, 100, 6);
+            Rectangle topNet2 = new Rectangle(1003-50, 240, 100, 6);
             Rectangle roofRec = new Rectangle(0, 0, 1106, 2);
 
             if (ballRec.IntersectsWith(roofRec))

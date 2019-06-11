@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Threading;
 using HeadSoccer.Classes;
 using System.Diagnostics;
+using HeadSoccer.Screens;
 
 namespace HeadSoccer.Screens
 {
@@ -19,6 +20,7 @@ namespace HeadSoccer.Screens
         int ballxSpeed = 30;
         int ballySpeed = 30;
         int p1Score = 0, p2Score = 0;
+        bool runOnce = true;
 
         private void GameScreen_KeyUp(object sender, KeyEventArgs e)
         {
@@ -50,6 +52,7 @@ namespace HeadSoccer.Screens
         public static List<Ball> Balls = new List<Ball>();
 
         Stopwatch scoreWatch = new Stopwatch();
+        Stopwatch endWatch = new Stopwatch();
 
         public GameScreen()
         {
@@ -119,13 +122,51 @@ namespace HeadSoccer.Screens
 
             Players[0].x = 88;
             Players[1].x = 893;
+
+            runOnce = true;
+        }
+
+        public bool scoreCheck()
+        {
+            if (p1Score >= 5)
+            {
+                p1winBox.Visible = true;
+                endWatch.Restart();
+                return true;
+            }
+
+            if (p2Score >= 5)
+            {
+                p2winBox.Visible = true;
+                endWatch.Restart();
+                return true;
+            }
+            return false;
+        }
+
+        public void mainScreen()
+        {
+            Form f = this.FindForm();
+            f.Controls.Remove(this);
+
+            MainScreen ms = new MainScreen();
+            f.Controls.Add(ms);
+
+            ms.Location = new Point((f.Width - ms.Width) / 2, (f.Height - ms.Height) / 2);
+            ms.Focus();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (scoreWatch.ElapsedMilliseconds >= 3000)
+            if (scoreWatch.ElapsedMilliseconds >= 3000 && scoreCheck() == false)
             {
                 GameReset();
+            }
+
+            if (endWatch.ElapsedMilliseconds >= 5000 && scoreCheck() == true)
+            {
+                GameTimer.Enabled = false;
+                mainScreen();
             }
 
             Players[0].Update(5);
@@ -157,14 +198,24 @@ namespace HeadSoccer.Screens
                 case 0:
                     break;
                 case 1:
-                    scoreWatch.Restart();
-                    goalBox.Visible = true;
-                    p1Score++;
+                    if (runOnce == true)
+                    {
+                        runOnce = false;
+                        scoreCheck();
+                        scoreWatch.Restart();
+                        goalBox.Visible = true;
+                        p1Score++;
+                    }
                     break;
                 case 2:
-                    scoreWatch.Restart();
-                    goalBox.Visible = true;
-                    p2Score++;
+                    if (runOnce == true)
+                    {
+                        runOnce = false;
+                        scoreCheck();
+                        scoreWatch.Restart();
+                        goalBox.Visible = true;
+                        p2Score++;
+                    }
                     break;
             }
 
