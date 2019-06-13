@@ -72,6 +72,10 @@ namespace HeadSoccer.Screens
             Players.Add(p1);
             Players.Add(p2); ;
             Balls.Add(b);
+
+            GameReset();
+            p1Score = 0;
+            p2Score = 0;
         }
 
         public void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -294,6 +298,7 @@ namespace HeadSoccer.Screens
         public void end()
         {
             saveStats();
+            GameTimer.Stop();
             mainScreen();
         }
 
@@ -339,26 +344,26 @@ namespace HeadSoccer.Screens
 
         public static void loadStats()
         {
-            XmlReader reader = XmlReader.Create("stats.xml");
+            //XmlReader reader = XmlReader.Create("stats.xml");
 
-            reader.ReadToFollowing("Longest");
-            lastTimer = Convert.ToInt16(reader.ReadString());
+            //reader.ReadToFollowing("Longest");
+            //lastTimer = Convert.ToInt16(reader.ReadString());
         }
 
         public void saveStats()
         {
-            XmlWriter writer = XmlWriter.Create("stats.xml", null);
+            //XmlWriter writer = XmlWriter.Create("stats.xml", null);
 
-            writer.WriteStartElement("statistics");
+            //writer.WriteStartElement("statistics");
 
-            if(timer > lastTimer)
-            {
-                writer.WriteElementString("Longest", timer.ToString());
-            }
+            //if(timer > lastTimer)
+            //{
+            //    writer.WriteElementString("Longest", timer.ToString());
+            //}
 
-            writer.WriteEndElement();
+            //writer.WriteEndElement();
 
-            writer.Close();
+            //writer.Close();
         }
     }
 }
