@@ -173,7 +173,10 @@
     <None Include="Resources\Jump Sound Effects All Sounds.wav" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="stats.xml" />
+    <Content Include="stats.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
