@@ -34,6 +34,8 @@
             this.goalBox = new System.Windows.Forms.PictureBox();
             this.p1winBox = new System.Windows.Forms.PictureBox();
             this.p2winBox = new System.Windows.Forms.PictureBox();
+            this.p1Label = new System.Windows.Forms.Label();
+            this.p2Label = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.goalBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.p1winBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.p2winBox)).BeginInit();
@@ -78,12 +80,38 @@
             this.p2winBox.TabStop = false;
             this.p2winBox.Visible = false;
             // 
+            // p1Label
+            // 
+            this.p1Label.BackColor = System.Drawing.SystemColors.Control;
+            this.p1Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
+            this.p1Label.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.p1Label.Location = new System.Drawing.Point(133, 620);
+            this.p1Label.Name = "p1Label";
+            this.p1Label.Size = new System.Drawing.Size(183, 47);
+            this.p1Label.TabIndex = 3;
+            this.p1Label.Text = "Player 1: 0";
+            this.p1Label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // p2Label
+            // 
+            this.p2Label.BackColor = System.Drawing.SystemColors.Control;
+            this.p2Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
+            this.p2Label.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.p2Label.Location = new System.Drawing.Point(811, 620);
+            this.p2Label.Name = "p2Label";
+            this.p2Label.Size = new System.Drawing.Size(183, 47);
+            this.p2Label.TabIndex = 4;
+            this.p2Label.Text = "Player 2: 0";
+            this.p2Label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // GameScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightPink;
             this.BackgroundImage = global::HeadSoccer.Properties.Resources.Stadium;
+            this.Controls.Add(this.p2Label);
+            this.Controls.Add(this.p1Label);
             this.Controls.Add(this.p2winBox);
             this.Controls.Add(this.p1winBox);
             this.Controls.Add(this.goalBox);
@@ -107,5 +135,7 @@
         private System.Windows.Forms.PictureBox goalBox;
         private System.Windows.Forms.PictureBox p1winBox;
         private System.Windows.Forms.PictureBox p2winBox;
+        private System.Windows.Forms.Label p1Label;
+        private System.Windows.Forms.Label p2Label;
     }
 }
