@@ -232,8 +232,8 @@ namespace HeadSoccer.Screens
                         scoreCheck();
                         scoreWatch.Restart();
                         goalBox.Visible = true;
-                        p1Score++;
-                        p1Label.Text = "Player 1: " + p1Score;
+                        p2Score++;
+                        p2Label.Text = "Player 2: " + p2Score;
                     }
                     break;
                 case 2:
@@ -243,8 +243,8 @@ namespace HeadSoccer.Screens
                         scoreCheck();
                         scoreWatch.Restart();
                         goalBox.Visible = true;
-                        p2Score++;
-                        p2Label.Text = "Player 2: " + p2Score;
+                        p1Score++;
+                        p1Label.Text = "Player 1: " + p1Score;
                     }
                     break;
             }
