@@ -172,8 +172,10 @@ namespace HeadSoccer.Screens
 
             if (endWatch.ElapsedMilliseconds >= 5000 && scoreCheck() == true)
             {
+
                 GameTimer.Enabled = false;
                 end();
+
             }
 
             Players[0].Update(5);
