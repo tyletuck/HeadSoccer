@@ -60,7 +60,7 @@ namespace HeadSoccer.Screens
         public GameScreen()
         {
             InitializeComponent();
-            loadStats();
+            //loadStats();
             //saveStats();
             GameTimer.Enabled = true;
 
@@ -278,7 +278,7 @@ namespace HeadSoccer.Screens
 
         public void end()
         {
-            saveStats();
+            //saveStats();
             mainScreen();
         }
 
