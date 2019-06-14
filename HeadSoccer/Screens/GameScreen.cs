@@ -233,6 +233,7 @@ namespace HeadSoccer.Screens
                         scoreWatch.Restart();
                         goalBox.Visible = true;
                         p1Score++;
+                        p1Label.Text = "Player 1: " + p1Score;
                     }
                     break;
                 case 2:
@@ -243,6 +244,7 @@ namespace HeadSoccer.Screens
                         scoreWatch.Restart();
                         goalBox.Visible = true;
                         p2Score++;
+                        p2Label.Text = "Player 2: " + p2Score;
                     }
                     break;
             }
