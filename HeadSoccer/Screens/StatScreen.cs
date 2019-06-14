@@ -22,6 +22,7 @@ namespace HeadSoccer.Screens
 
         private void MainButton_Click(object sender, EventArgs e)
         {
+        //goes back to the main menu 
             Form f = this.FindForm();
             f.Controls.Remove(this);
 
@@ -31,7 +32,8 @@ namespace HeadSoccer.Screens
             ms.Location = new Point((f.Width - ms.Width) / 2, (f.Height - ms.Height) / 2);
             ms.Focus();
         }
-
+        
+        //Changing the button colour
         private void MainButton_Enter(object sender, EventArgs e)
         {
             MainButton.BackColor = Color.Red;
@@ -44,6 +46,7 @@ namespace HeadSoccer.Screens
 
         public void Loading()
         {
+        //Loads the stats off the xml and displays them to the screen in the order they are loaded.
             XmlReader reader = XmlReader.Create("stats.xml");
 
             reader.ReadToFollowing("P1Goals");
@@ -57,9 +60,9 @@ namespace HeadSoccer.Screens
             reader.ReadToFollowing("Longest");
             lastTimer = Convert.ToInt16(reader.ReadString());
 
-            outputLabel.Text = "Player 1 Total Goals: " + p1Goal + "\n \n";
-            outputLabel.Text += "Player 2 Total Goals: " + p2Goal + "\n \n";
-            outputLabel.Text += "Total Goals Scored: " + totalGoal + " \n \n";
+            outputLabel.Text = "Player 1 Total Goals: " + p1Goal + "\n \n \n";
+            outputLabel.Text += "Player 2 Total Goals: " + p2Goal + "\n \n \n";
+            outputLabel.Text += "Total Goals Scored: " + totalGoal + " \n \n \n";
             outputLabel.Text += "Longest Game: " + lastTimer;
         }
     }
