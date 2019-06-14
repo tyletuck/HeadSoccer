@@ -266,13 +266,13 @@ namespace HeadSoccer.Screens
             Balls[0].xSpeed *= -1;
             //this needs to change the direction value directly in order to properly move the ball.
             //Like this whenever it is interacted with the ball with move the opposite direction to what is wanted.
-            //if (Balls[0].direction = 0)
+            //if (Balls[0].direction = 2)
             //{
             //  Balls[0].direction = 1;
             //}
             //if (Balls[0].direction = 1)
             //{
-            //  Balls[0].direction = 0;
+            //  Balls[0].direction = 2;
             //}
             }
             if (Balls[0].topCollision() == true)
