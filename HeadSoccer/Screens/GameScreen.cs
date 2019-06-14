@@ -11,6 +11,7 @@ using System.Threading;
 using HeadSoccer.Classes;
 using System.Diagnostics;
 using HeadSoccer.Screens;
+using System.Xml;
 
 namespace HeadSoccer.Screens
 {
@@ -20,7 +21,9 @@ namespace HeadSoccer.Screens
         int ballxSpeed = 30;
         int ballySpeed = 30;
         int p1Score = 0, p2Score = 0;
-        bool runOnce = true;
+        static int timer;
+        static int lastTimer = 0;
+        bool runOnce = true, doubleCheck = true;
 
         private void GameScreen_KeyUp(object sender, KeyEventArgs e)
         {
@@ -48,7 +51,7 @@ namespace HeadSoccer.Screens
         }
 
         List<Rectangle> hitBox = new List<Rectangle>();
-        public static  List<Player> Players = new List<Player>();
+        public static List<Player> Players = new List<Player>();
         public static List<Ball> Balls = new List<Ball>();
 
         Stopwatch scoreWatch = new Stopwatch();
@@ -57,6 +60,8 @@ namespace HeadSoccer.Screens
         public GameScreen()
         {
             InitializeComponent();
+            loadStats();
+            //saveStats();
             GameTimer.Enabled = true;
 
             Player p1 = new Player(88, 320, 15, 80, 170);
@@ -65,8 +70,12 @@ namespace HeadSoccer.Screens
             Ball b = new Ball(525, 200, ballxSpeed, ballySpeed);
 
             Players.Add(p1);
-            Players.Add(p2);;
+            Players.Add(p2); ;
             Balls.Add(b);
+
+            GameReset();
+            p1Score = 0;
+            p2Score = 0;
         }
 
         public void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -76,7 +85,7 @@ namespace HeadSoccer.Screens
                 case Keys.A:
                     aDown = true;
                     break;
-                  case Keys.D:
+                case Keys.D:
                     dDown = true;
                     break;
                 case Keys.Left:
@@ -131,16 +140,38 @@ namespace HeadSoccer.Screens
             if (p1Score >= 5)
             {
                 p1winBox.Visible = true;
-                endWatch.Restart();
+                if (doubleCheck == true)
+                {
+                    doubleCheck = false;
+                    endWatch.Restart();
+                }
+
+                if (endWatch.ElapsedMilliseconds >= 5000)
+                {
+                    doubleCheck = true;
+                    end();
+                }
                 return true;
+
             }
 
             if (p2Score >= 5)
             {
                 p2winBox.Visible = true;
-                endWatch.Restart();
+                if (doubleCheck == true)
+                {
+                    doubleCheck = false;
+                    endWatch.Restart();
+                }
+
+                if (endWatch.ElapsedMilliseconds >= 5000)
+                {
+                    doubleCheck = true;
+                    end();
+                }
                 return true;
             }
+
             return false;
         }
 
@@ -158,16 +189,13 @@ namespace HeadSoccer.Screens
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            timer++;
+
             if (scoreWatch.ElapsedMilliseconds >= 3000 && scoreCheck() == false)
             {
                 GameReset();
             }
 
-            if (endWatch.ElapsedMilliseconds >= 5000 && scoreCheck() == true)
-            {
-                GameTimer.Enabled = false;
-                mainScreen();
-            }
 
             Players[0].Update(5);
             Players[1].Update(5);
@@ -204,7 +232,8 @@ namespace HeadSoccer.Screens
                         scoreCheck();
                         scoreWatch.Restart();
                         goalBox.Visible = true;
-                        p1Score++;
+                        p2Score++;
+                        p2Label.Text = "Player 2: " + p2Score;
                     }
                     break;
                 case 2:
@@ -214,7 +243,8 @@ namespace HeadSoccer.Screens
                         scoreCheck();
                         scoreWatch.Restart();
                         goalBox.Visible = true;
-                        p2Score++;
+                        p1Score++;
+                        p1Label.Text = "Player 1: " + p1Score;
                     }
                     break;
             }
@@ -267,46 +297,75 @@ namespace HeadSoccer.Screens
             Refresh();
         }
 
+        public void end()
+        {
+            saveStats();
+            GameTimer.Stop();
+            mainScreen();
+        }
+
+
         private void GameScreen_Paint(object sender, PaintEventArgs e)
         {
 
             e.Graphics.DrawImage(Properties.Resources.Ball, Balls[0].x, Balls[0].y, 50, 50);
 
-                switch (CharacterScreen.rotation1)
-                {
-                    case 1:
-                        e.Graphics.DrawImage(Properties.Resources.Chufu_Cry_Head, Players[0].x, Players[0].y, 79, 170);
-                        break;
-                    case 2:
-                        e.Graphics.DrawImage(Properties.Resources.Cool_Cat_Head, Players[0].x, Players[0].y, 79, 170);
-                        break;
-                    case 3:
-                        e.Graphics.DrawImage(Properties.Resources.Ugly_Jaden_Head, Players[0].x, Players[0].y, 79, 170);
-                        break;
-                    case 4:
-                        e.Graphics.DrawImage(Properties.Resources.Thanos_Ouch_Head, Players[0].x, Players[0].y, 79, 170);
-                        break;
-                }
+            switch (CharacterScreen.rotation1)
+            {
+                case 1:
+                    e.Graphics.DrawImage(Properties.Resources.Chufu_Cry_Head, Players[0].x, Players[0].y, 79, 170);
+                    break;
+                case 2:
+                    e.Graphics.DrawImage(Properties.Resources.Cool_Cat_Head, Players[0].x, Players[0].y, 79, 170);
+                    break;
+                case 3:
+                    e.Graphics.DrawImage(Properties.Resources.Ugly_Jaden_Head, Players[0].x, Players[0].y, 79, 170);
+                    break;
+                case 4:
+                    e.Graphics.DrawImage(Properties.Resources.Thanos_Ouch_Head, Players[0].x, Players[0].y, 79, 170);
+                    break;
+            }
 
-                switch (CharacterScreen.rotation2)
-                {
-                    case 1:
-                        e.Graphics.DrawImage(Properties.Resources.Chufu_Cry_Head, Players[1].x, Players[1].y, 79, 170);
-                    
-                        break;
-                    case 2:
-                        e.Graphics.DrawImage(Properties.Resources.Cool_Cat_Head, Players[1].x, Players[1].y, 79, 170);
-                        break;
-                    case 3:
-                        e.Graphics.DrawImage(Properties.Resources.Ugly_Jaden_Head, Players[1].x, Players[1].y, 79, 170);
-                        break;
-                    case 4:
-                        e.Graphics.DrawImage(Properties.Resources.Thanos_Ouch_Head, Players[1].x, Players[1].y, 79, 170);
-                        break;
-                }
-            
+            switch (CharacterScreen.rotation2)
+            {
+                case 1:
+                    e.Graphics.DrawImage(Properties.Resources.Chufu_Cry_Head, Players[1].x, Players[1].y, 79, 170);
 
-            
+                    break;
+                case 2:
+                    e.Graphics.DrawImage(Properties.Resources.Cool_Cat_Head, Players[1].x, Players[1].y, 79, 170);
+                    break;
+                case 3:
+                    e.Graphics.DrawImage(Properties.Resources.Ugly_Jaden_Head, Players[1].x, Players[1].y, 79, 170);
+                    break;
+                case 4:
+                    e.Graphics.DrawImage(Properties.Resources.Thanos_Ouch_Head, Players[1].x, Players[1].y, 79, 170);
+                    break;
+            }
+        }
+
+        public static void loadStats()
+        {
+            //XmlReader reader = XmlReader.Create("stats.xml");
+
+            //reader.ReadToFollowing("Longest");
+            //lastTimer = Convert.ToInt16(reader.ReadString());
+        }
+
+        public void saveStats()
+        {
+            //XmlWriter writer = XmlWriter.Create("stats.xml", null);
+
+            //writer.WriteStartElement("statistics");
+
+            //if(timer > lastTimer)
+            //{
+            //    writer.WriteElementString("Longest", timer.ToString());
+            //}
+
+            //writer.WriteEndElement();
+
+            //writer.Close();
         }
     }
 }
