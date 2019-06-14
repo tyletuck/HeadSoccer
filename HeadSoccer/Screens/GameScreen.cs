@@ -23,7 +23,7 @@ namespace HeadSoccer.Screens
         int p1Score = 0, p2Score = 0;
         static int timer;
         static int lastTimer = 0;
-        bool runOnce = true;
+        bool runOnce = true, doubleCheck = true;
 
         private void GameScreen_KeyUp(object sender, KeyEventArgs e)
         {
@@ -60,7 +60,7 @@ namespace HeadSoccer.Screens
         public GameScreen()
         {
             InitializeComponent();
-            //loadStats();
+            loadStats();
             //saveStats();
             GameTimer.Enabled = true;
 
@@ -72,6 +72,10 @@ namespace HeadSoccer.Screens
             Players.Add(p1);
             Players.Add(p2); ;
             Balls.Add(b);
+
+            GameReset();
+            p1Score = 0;
+            p2Score = 0;
         }
 
         public void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -136,16 +140,38 @@ namespace HeadSoccer.Screens
             if (p1Score >= 5)
             {
                 p1winBox.Visible = true;
-                endWatch.Restart();
+                if (doubleCheck == true)
+                {
+                    doubleCheck = false;
+                    endWatch.Restart();
+                }
+
+                if (endWatch.ElapsedMilliseconds >= 5000)
+                {
+                    doubleCheck = true;
+                    end();
+                }
                 return true;
+
             }
 
             if (p2Score >= 5)
             {
                 p2winBox.Visible = true;
-                endWatch.Restart();
+                if (doubleCheck == true)
+                {
+                    doubleCheck = false;
+                    endWatch.Restart();
+                }
+
+                if (endWatch.ElapsedMilliseconds >= 5000)
+                {
+                    doubleCheck = true;
+                    end();
+                }
                 return true;
             }
+
             return false;
         }
 
@@ -170,13 +196,6 @@ namespace HeadSoccer.Screens
                 GameReset();
             }
 
-            if (endWatch.ElapsedMilliseconds >= 5000 && scoreCheck() == true)
-            {
-
-                GameTimer.Enabled = false;
-                end();
-
-            }
 
             Players[0].Update(5);
             Players[1].Update(5);
@@ -213,7 +232,8 @@ namespace HeadSoccer.Screens
                         scoreCheck();
                         scoreWatch.Restart();
                         goalBox.Visible = true;
-                        p1Score++;
+                        p2Score++;
+                        p2Label.Text = "Player 2: " + p2Score;
                     }
                     break;
                 case 2:
@@ -223,7 +243,8 @@ namespace HeadSoccer.Screens
                         scoreCheck();
                         scoreWatch.Restart();
                         goalBox.Visible = true;
-                        p2Score++;
+                        p1Score++;
+                        p1Label.Text = "Player 1: " + p1Score;
                     }
                     break;
             }
@@ -278,7 +299,8 @@ namespace HeadSoccer.Screens
 
         public void end()
         {
-            //saveStats();
+            saveStats();
+            GameTimer.Stop();
             mainScreen();
         }
 
@@ -324,26 +346,26 @@ namespace HeadSoccer.Screens
 
         public static void loadStats()
         {
-            XmlReader reader = XmlReader.Create("Resources/stats.xml");
+            //XmlReader reader = XmlReader.Create("stats.xml");
 
-            reader.ReadToFollowing("Longest Game");
-            lastTimer = Convert.ToInt16(reader.ReadString());
+            //reader.ReadToFollowing("Longest");
+            //lastTimer = Convert.ToInt16(reader.ReadString());
         }
 
         public void saveStats()
         {
-            XmlWriter writer = XmlWriter.Create("Resources/stats.xml", null);
+            //XmlWriter writer = XmlWriter.Create("stats.xml", null);
 
-            writer.WriteStartElement("statistics");
+            //writer.WriteStartElement("statistics");
 
-            if(timer > lastTimer)
-            {
-                writer.WriteElementString("Longest Game", timer.ToString());
-            }
+            //if(timer > lastTimer)
+            //{
+            //    writer.WriteElementString("Longest", timer.ToString());
+            //}
 
-            writer.WriteEndElement();
+            //writer.WriteEndElement();
 
-            writer.Close();
+            //writer.Close();
         }
     }
 }
