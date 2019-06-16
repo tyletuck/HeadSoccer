@@ -19,6 +19,7 @@ namespace HeadSoccer.Screens
 
         private void button1_Click(object sender, EventArgs e)
         {
+        //if clicked go to character screen
             Form f = this.FindForm();
             f.Controls.Remove(this);
 
@@ -31,12 +32,14 @@ namespace HeadSoccer.Screens
 
         private void button2_Click(object sender, EventArgs e)
         {
+        //if clicked close the program
             Form f = this.FindForm();
             f.Close();
         }
 
         private void statButton_Click(object sender, EventArgs e)
         {
+        //if clicked go to stats screen
             Form f = this.FindForm();
             f.Controls.Remove(this);
 
@@ -47,6 +50,7 @@ namespace HeadSoccer.Screens
             ss.Focus();
         }
 
+//setting the colour for when the button is hovered over
         private void playButton_Enter(object sender, EventArgs e)
         {
             playButton.BackColor = Color.Red;

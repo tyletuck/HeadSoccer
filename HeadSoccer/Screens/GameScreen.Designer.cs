@@ -45,6 +45,10 @@
             // 
             this.GameTimer.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 16;
+            // 
             // goalBox
             // 
             this.goalBox.BackColor = System.Drawing.Color.Transparent;

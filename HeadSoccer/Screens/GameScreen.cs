@@ -12,7 +12,6 @@ using HeadSoccer.Classes;
 using System.Diagnostics;
 using HeadSoccer.Screens;
 using System.Xml;
-using System.Media;
 
 namespace HeadSoccer.Screens
 {
@@ -28,6 +27,7 @@ namespace HeadSoccer.Screens
 
         private void GameScreen_KeyUp(object sender, KeyEventArgs e)
         {
+        //Different keys for the players to control their character or pause the game
             switch (e.KeyCode)
             {
                 case Keys.A:
@@ -51,19 +51,18 @@ namespace HeadSoccer.Screens
             }
         }
 
+//Lists for the hitboxes, players, and the ball
         List<Rectangle> hitBox = new List<Rectangle>();
         public static List<Player> Players = new List<Player>();
         public static List<Ball> Balls = new List<Ball>();
 
+//stopwatches used once a goal is scored
         Stopwatch scoreWatch = new Stopwatch();
         Stopwatch endWatch = new Stopwatch();
 
-        SoundPlayer cheer = new SoundPlayer(Properties.Resources.Cheer);
-        SoundPlayer jump = new SoundPlayer(Properties.Resources.Jump);
-        SoundPlayer kick = new SoundPlayer(Properties.Resources.Kick);
-
         public GameScreen()
         {
+        //Starts the gametimer and sets the initial values
             InitializeComponent();
             loadStats();
             //saveStats();
@@ -85,6 +84,7 @@ namespace HeadSoccer.Screens
 
         public void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
+        //Different keys for the players to control their character or pause the game
             switch (e.KeyCode)
             {
                 case Keys.A:
@@ -127,7 +127,7 @@ namespace HeadSoccer.Screens
 
         public void GameReset()
         {
-            cheer.Stop();
+        //Rests the positions of everything and takes the goal pop up away.
             scoreWatch.Reset();
             goalBox.Visible = false;
 
@@ -143,6 +143,7 @@ namespace HeadSoccer.Screens
 
         public bool scoreCheck()
         {
+        //Checks if a player has won and possibly ends the game if it has
             if (p1Score >= 5)
             {
                 p1winBox.Visible = true;
@@ -152,7 +153,7 @@ namespace HeadSoccer.Screens
                     endWatch.Restart();
                 }
 
-                if (endWatch.ElapsedMilliseconds >= 5000)
+                if (endWatch.ElapsedMilliseconds >= 3000)
                 {
                     doubleCheck = true;
                     end();
@@ -183,6 +184,7 @@ namespace HeadSoccer.Screens
 
         public void mainScreen()
         {
+        //Goes back to the mainscreen when called
             Form f = this.FindForm();
             f.Controls.Remove(this);
 
@@ -196,26 +198,27 @@ namespace HeadSoccer.Screens
         private void timer1_Tick(object sender, EventArgs e)
         {
             timer++;
-
+//if 3 seconds has passed and nobody won resets the game state (called when someone scores)
             if (scoreWatch.ElapsedMilliseconds >= 3000 && scoreCheck() == false)
             {
                 GameReset();
             }
 
-
+            //updates the player position mainly for the y. Also the ball position
             Players[0].Update(5);
             Players[1].Update(5);
 
             Balls[0].ballUpdate(5);
-
+            
+            //Draws new hitboxes every update of the screen
             Rectangle player1 = new Rectangle(Players[0].x, Players[0].y, Players[0].width, Players[0].height);
             Rectangle player2 = new Rectangle(Players[1].x, Players[1].y, Players[1].width, Players[1].height);
 
             #region Ball
 
+            //Ball collision with a player. Moves the ball based on the side the player was on
             if (Balls[0].BallCollision(Players[0]) == true)
             {
-                kick.Play();
                 Balls[0].y += Convert.ToInt16(Balls[0].velocityY);
                 Balls[0].OnHit();
                 Balls[0].Horizontal(Players[0]);
@@ -223,12 +226,12 @@ namespace HeadSoccer.Screens
 
             if (Balls[0].BallCollision(Players[1]) == true)
             {
-                kick.Play();
                 Balls[0].y += Convert.ToInt16(Balls[0].velocityY);
                 Balls[0].OnHit();
                 Balls[0].Horizontal(Players[1]);
             }
 
+            //balls collision with the net. changes outcome based on which net.
             switch (Balls[0].BallCollisonNet())
             {
                 case 0:
@@ -236,19 +239,6 @@ namespace HeadSoccer.Screens
                 case 1:
                     if (runOnce == true)
                     {
-                        cheer.Play();
-                        runOnce = false;
-                        scoreCheck();
-                        scoreWatch.Restart();
-                        goalBox.Visible = true;
-                        p1Score++;
-                        p1Label.Text = "Player 1: " + p1Score;
-                    }
-                    break;
-                case 2:
-                    if (runOnce == true)
-                    {
-                        cheer.Play();
                         runOnce = false;
                         scoreCheck();
                         scoreWatch.Restart();
@@ -257,11 +247,33 @@ namespace HeadSoccer.Screens
                         p2Label.Text = "Player 2: " + p2Score;
                     }
                     break;
+                case 2:
+                    if (runOnce == true)
+                    {
+                        runOnce = false;
+                        scoreCheck();
+                        scoreWatch.Restart();
+                        goalBox.Visible = true;
+                        p1Score++;
+                        p1Label.Text = "Player 1: " + p1Score;
+                    }
+                    break;
             }
-
+            
+            //if the ball collides with a player or the walls or top of screen, multiply a value by -1
             if (Balls[0].BallCollision() == true)
             {
-                Balls[0].xSpeed *= -1;
+            Balls[0].xSpeed *= -1;
+            //this needs to change the direction value directly in order to properly move the ball.
+            //Like this whenever it is interacted with the ball with move the opposite direction to what is wanted.
+            //if (Balls[0].direction = 2)
+            //{
+            //  Balls[0].direction = 1;
+            //}
+            //if (Balls[0].direction = 1)
+            //{
+            //  Balls[0].direction = 2;
+            //}
             }
             if (Balls[0].topCollision() == true)
             {
@@ -270,12 +282,14 @@ namespace HeadSoccer.Screens
             #endregion
 
             #region Player
+            //if the players collide, move them 40 units away from each other
             if (player1.IntersectsWith(player2))
             {
                 Players[0].x -= 20;
                 Players[1].x += 20;
             }
 
+            //if the player is trying to move against a wall moves them away based on their speed
             if (aDown == true && Players[1].WallStop() == true)
             {
                 Players[1].x = Players[1].x - Players[1].speed;
@@ -293,15 +307,15 @@ namespace HeadSoccer.Screens
             {
                 Players[0].x = Players[0].x + Players[0].speed;
             }
+            
+            //lets the player jump if they are on the ground and press the respective key
             if (spaceDown == true && Players[0].y >= 300)
             {
-                jump.Play();
                 Players[0].y += Convert.ToInt16(Players[0].velocityY);
                 Players[0].OnJumpKeyPressed();
             }
             if (zDown == true && Players[1].y >= 300)
             {
-                jump.Play();
                 Players[1].y += Convert.ToInt16(Players[0].velocityY);
                 Players[1].OnJumpKeyPressed();
             }
@@ -311,6 +325,7 @@ namespace HeadSoccer.Screens
 
         public void end()
         {
+        //Methods that run when the game ends and is going to reset
             saveStats();
             GameTimer.Stop();
             mainScreen();
@@ -319,7 +334,7 @@ namespace HeadSoccer.Screens
 
         private void GameScreen_Paint(object sender, PaintEventArgs e)
         {
-
+            //Draws the ball and character based on their selections
             e.Graphics.DrawImage(Properties.Resources.Ball, Balls[0].x, Balls[0].y, 50, 50);
 
             switch (CharacterScreen.rotation1)

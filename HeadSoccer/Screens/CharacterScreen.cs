@@ -23,6 +23,8 @@ namespace HeadSoccer.Screens
 
         private void CharacterScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
+        //updates the rotation of the character based on the keys pressed
+        //Also include the ready up variables.
             switch (e.KeyCode)
             {
                 case Keys.W:
@@ -48,6 +50,7 @@ namespace HeadSoccer.Screens
 
         public void Rotation1Up()
         {
+        //Rotates the players selection if they havent readied up yet. The same for the next few methods.
             if (p1Ready == false)
             {
                 if (rotation1 >= 5)
@@ -112,6 +115,7 @@ namespace HeadSoccer.Screens
 
         public void drawChar()
         {
+        //Draws the character based off the selection set by the player.
             switch (rotation1)
             {
                 case 1:
@@ -149,6 +153,7 @@ namespace HeadSoccer.Screens
 
         public void player1Ready()
         {
+        //Player readies up and sets stops the player from changing characters afterwords. Same for next method
             if (p1Ready == false)
             {
                 p1Ready = true;
@@ -179,6 +184,7 @@ namespace HeadSoccer.Screens
 
         public void readyCheck()
         {
+        //If both players are ready go to next screen.
             if (p1Ready == true && p2Ready == true)
             {
                 Form f = this.FindForm();

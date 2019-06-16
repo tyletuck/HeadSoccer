@@ -26,6 +26,7 @@ namespace HeadSoccer.Classes
 
         public bool WallStop()
         {
+            //checks if the player collides with the wall and moves them off it.
             if (x < 55)
             {
                 x = 70;
@@ -42,11 +43,13 @@ namespace HeadSoccer.Classes
 
        public void Update(float time)
         {
+           //updates the y based off the velocity calculated.
             velocityY += gravity * time;        // Apply gravity to vertical velocity
             y += Convert.ToInt16(velocityY * time);      // Apply vertical velocity to X position
 
             if (y > 320)
             {
+                //doesnt allow the character to jump if not on the ground (or close to it)
                 y = 320;
                 velocityY = 00;
                 onGround = true;
@@ -55,6 +58,7 @@ namespace HeadSoccer.Classes
 
        public void OnJumpKeyPressed()
         {
+           //getting the jump started
             velocityY = -12.0f;   // Give a vertical boost to the players velocity to start jump
         }
 
