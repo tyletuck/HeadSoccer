@@ -12,6 +12,7 @@ using HeadSoccer.Classes;
 using System.Diagnostics;
 using HeadSoccer.Screens;
 using System.Xml;
+using System.Media;
 
 namespace HeadSoccer.Screens
 {
@@ -56,6 +57,10 @@ namespace HeadSoccer.Screens
 
         Stopwatch scoreWatch = new Stopwatch();
         Stopwatch endWatch = new Stopwatch();
+
+        SoundPlayer cheer = new SoundPlayer(Properties.Resources.Cheer);
+        SoundPlayer jump = new SoundPlayer(Properties.Resources.Jump);
+        SoundPlayer kick = new SoundPlayer(Properties.Resources.Kick);
 
         public GameScreen()
         {
@@ -122,6 +127,7 @@ namespace HeadSoccer.Screens
 
         public void GameReset()
         {
+            cheer.Stop();
             scoreWatch.Reset();
             goalBox.Visible = false;
 
@@ -209,6 +215,7 @@ namespace HeadSoccer.Screens
 
             if (Balls[0].BallCollision(Players[0]) == true)
             {
+                kick.Play();
                 Balls[0].y += Convert.ToInt16(Balls[0].velocityY);
                 Balls[0].OnHit();
                 Balls[0].Horizontal(Players[0]);
@@ -216,6 +223,7 @@ namespace HeadSoccer.Screens
 
             if (Balls[0].BallCollision(Players[1]) == true)
             {
+                kick.Play();
                 Balls[0].y += Convert.ToInt16(Balls[0].velocityY);
                 Balls[0].OnHit();
                 Balls[0].Horizontal(Players[1]);
@@ -228,6 +236,7 @@ namespace HeadSoccer.Screens
                 case 1:
                     if (runOnce == true)
                     {
+                        cheer.Play();
                         runOnce = false;
                         scoreCheck();
                         scoreWatch.Restart();
@@ -239,6 +248,7 @@ namespace HeadSoccer.Screens
                 case 2:
                     if (runOnce == true)
                     {
+                        cheer.Play();
                         runOnce = false;
                         scoreCheck();
                         scoreWatch.Restart();
@@ -285,11 +295,13 @@ namespace HeadSoccer.Screens
             }
             if (spaceDown == true && Players[0].y >= 300)
             {
+                jump.Play();
                 Players[0].y += Convert.ToInt16(Players[0].velocityY);
                 Players[0].OnJumpKeyPressed();
             }
             if (zDown == true && Players[1].y >= 300)
             {
+                jump.Play();
                 Players[1].y += Convert.ToInt16(Players[0].velocityY);
                 Players[1].OnJumpKeyPressed();
             }
