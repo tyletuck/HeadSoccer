@@ -12,6 +12,7 @@ using HeadSoccer.Classes;
 using System.Diagnostics;
 using HeadSoccer.Screens;
 using System.Xml;
+using System.Media;
 
 namespace HeadSoccer.Screens
 {
@@ -59,6 +60,11 @@ namespace HeadSoccer.Screens
 //stopwatches used once a goal is scored
         Stopwatch scoreWatch = new Stopwatch();
         Stopwatch endWatch = new Stopwatch();
+
+        //Sounds for different interactions
+        SoundPlayer cheer = new SoundPlayer(Properties.Resources.Cheer);
+        SoundPlayer kick = new SoundPlayer(Properties.Resources.Kick);
+        SoundPlayer jump = new SoundPlayer(Properties.Resources.Jump);
 
         public GameScreen()
         {
@@ -127,7 +133,8 @@ namespace HeadSoccer.Screens
 
         public void GameReset()
         {
-        //Rests the positions of everything and takes the goal pop up away.
+            //Rests the positions of everything and takes the goal pop up away.
+            cheer.Stop();
             scoreWatch.Reset();
             goalBox.Visible = false;
 
@@ -219,6 +226,7 @@ namespace HeadSoccer.Screens
             //Ball collision with a player. Moves the ball based on the side the player was on
             if (Balls[0].BallCollision(Players[0]) == true)
             {
+                kick.Play();
                 Balls[0].y += Convert.ToInt16(Balls[0].velocityY);
                 Balls[0].OnHit();
                 Balls[0].Horizontal(Players[0]);
@@ -226,6 +234,7 @@ namespace HeadSoccer.Screens
 
             if (Balls[0].BallCollision(Players[1]) == true)
             {
+                kick.Play();
                 Balls[0].y += Convert.ToInt16(Balls[0].velocityY);
                 Balls[0].OnHit();
                 Balls[0].Horizontal(Players[1]);
@@ -239,6 +248,7 @@ namespace HeadSoccer.Screens
                 case 1:
                     if (runOnce == true)
                     {
+                        cheer.Play();
                         runOnce = false;
                         scoreCheck();
                         scoreWatch.Restart();
@@ -250,6 +260,7 @@ namespace HeadSoccer.Screens
                 case 2:
                     if (runOnce == true)
                     {
+                        cheer.Play();
                         runOnce = false;
                         scoreCheck();
                         scoreWatch.Restart();
@@ -263,17 +274,7 @@ namespace HeadSoccer.Screens
             //if the ball collides with a player or the walls or top of screen, multiply a value by -1
             if (Balls[0].BallCollision() == true)
             {
-            Balls[0].xSpeed *= -1;
-            //this needs to change the direction value directly in order to properly move the ball.
-            //Like this whenever it is interacted with the ball with move the opposite direction to what is wanted.
-            //if (Balls[0].direction = 2)
-            //{
-            //  Balls[0].direction = 1;
-            //}
-            //if (Balls[0].direction = 1)
-            //{
-            //  Balls[0].direction = 2;
-            //}
+                Balls[0].xSpeed *= -1;
             }
             if (Balls[0].topCollision() == true)
             {
@@ -311,11 +312,13 @@ namespace HeadSoccer.Screens
             //lets the player jump if they are on the ground and press the respective key
             if (spaceDown == true && Players[0].y >= 300)
             {
+                jump.Play();
                 Players[0].y += Convert.ToInt16(Players[0].velocityY);
                 Players[0].OnJumpKeyPressed();
             }
             if (zDown == true && Players[1].y >= 300)
             {
+                jump.Play();
                 Players[1].y += Convert.ToInt16(Players[0].velocityY);
                 Players[1].OnJumpKeyPressed();
             }
