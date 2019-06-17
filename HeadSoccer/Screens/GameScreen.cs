@@ -410,6 +410,10 @@ namespace HeadSoccer.Screens
             {
                 writer.WriteElementString("Longest", timer.ToString());
             }
+            else 
+            {
+                writer.WriteElementString("Longest", lastTimer.ToString());
+            }
 
 
             writer.WriteEndElement();
