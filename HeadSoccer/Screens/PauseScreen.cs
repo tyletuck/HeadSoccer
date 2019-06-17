@@ -13,7 +13,8 @@ namespace HeadSoccer.Screens
 {
     public partial class PauseScreen : Form
     {
-
+        // I dont really know exactly how this works but it pauses the screen without resetting the gamescreen
+        
         private static PauseScreen pauseForm;
 
         private static DialogResult buttonResult = new DialogResult();

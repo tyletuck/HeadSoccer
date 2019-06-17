@@ -19,6 +19,7 @@ namespace HeadSoccer
             InitializeComponent();
         }
 
+        //Immediately loads into the main menu
         private void Form1_Load(object sender, EventArgs e)
         {
             MainScreen ms = new MainScreen();

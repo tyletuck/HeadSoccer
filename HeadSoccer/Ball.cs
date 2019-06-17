@@ -27,6 +27,7 @@ namespace HeadSoccer
 
         public void Horizontal(Player p)
         {
+            //Checks where the player is and bounces the ball based off that position.
             if (p.x > x)
             {
                 direction = 1;
@@ -41,6 +42,7 @@ namespace HeadSoccer
 
         public void ballUpdate(float time)
         {
+            //updates the y based on velocity
             velocityY += gravity * time;        // Apply gravity to vertical velocity
             y += Convert.ToInt16(velocityY * time);      // Apply vertical velocity to X position
 
@@ -62,11 +64,13 @@ namespace HeadSoccer
 
         public void OnHit()
         {
+            //a boost to get started
             velocityY = -18.0f;   // Give a vertical boost to the balls velocity to start
         }
 
         public bool BallCollision(Player p)
         {
+            //checks for ball collision with player
             Rectangle playerRec = new Rectangle(p.x, p.y, p.width, p.height);
             Rectangle ballRec = new Rectangle(x, y, 50, 50);
 
@@ -82,6 +86,7 @@ namespace HeadSoccer
 
         public bool topCollision()
         {
+            //checks the ball collision with roof and the top of the nets
             Rectangle ballRec = new Rectangle(x, y, 50, 50);
             Rectangle topNet1 = new Rectangle(0, 240, 100, 6);
             Rectangle topNet2 = new Rectangle(1003, 240, 100, 6);
@@ -103,6 +108,7 @@ namespace HeadSoccer
         }
         public bool BallCollision()
         {
+            //ball collision with the walls
             Rectangle ballRec = new Rectangle(x, y, 50, 50);
             Rectangle rWallRec = new Rectangle(1103, 0, 4, 280);
             Rectangle lWallRec = new Rectangle(0, 0, 4, 280);
@@ -123,6 +129,7 @@ namespace HeadSoccer
 
         public int BallCollisonNet()
         {
+            //Ball collision with the net
             Rectangle ballRec = new Rectangle(x, y, 50, 50);
             Rectangle rNetRec = new Rectangle(0, 250, 85, 250);
             Rectangle lNetRec = new Rectangle(1106 - 85, 250, 85, 250);
