@@ -22,10 +22,11 @@ namespace HeadSoccer.Screens
         int ballxSpeed = 30;
         int ballySpeed = 30;
         public static int p1Score = 0, p2Score = 0;
-        static int timer;
+        static int timer = 0;
         public static int P1Goals = 0;
         public static int P2Goals = 0;
         static int lastTimer = 0;
+        static int nothing = 0;
         bool runOnce = true, doubleCheck = true;
 
         private void GameScreen_KeyUp(object sender, KeyEventArgs e)
@@ -87,6 +88,7 @@ namespace HeadSoccer.Screens
             GameReset();
             p1Score = 0;
             p2Score = 0;
+
         }
 
         public void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -192,7 +194,9 @@ namespace HeadSoccer.Screens
 
         public void mainScreen()
         {
-        //Goes back to the mainscreen when called
+            //Goes back to the mainscreen when called
+            cheer.Stop();
+
             Form f = this.FindForm();
             f.Controls.Remove(this);
 
@@ -391,7 +395,7 @@ namespace HeadSoccer.Screens
 
         public void saveStats()
         {
-            //timer = timer / 60;
+            timer = timer / 60;
             P1Goals += p1Score;
             P2Goals += p2Score;
 
@@ -406,6 +410,7 @@ namespace HeadSoccer.Screens
             {
                 writer.WriteElementString("Longest", timer.ToString());
             }
+
 
             writer.WriteEndElement();
 
