@@ -390,7 +390,7 @@ namespace HeadSoccer.Screens
             P2Goals = Convert.ToInt16(reader.ReadString());
 
             reader.ReadToFollowing("Longest");
-            lastTimer = Convert.ToInt16(reader.ReadString());
+            //lastTimer = Convert.ToInt16(reader.ReadString());
         }
 
         public void saveStats()
