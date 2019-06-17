@@ -21,8 +21,10 @@ namespace HeadSoccer.Screens
         public static bool aDown, dDown, leftDown, rightDown, spaceDown, zDown;
         int ballxSpeed = 30;
         int ballySpeed = 30;
-        int p1Score = 0, p2Score = 0;
+        public static int p1Score = 0, p2Score = 0;
         static int timer;
+        public static int P1Goals = 0;
+        public static int P2Goals = 0;
         static int lastTimer = 0;
         bool runOnce = true, doubleCheck = true;
 
@@ -71,7 +73,6 @@ namespace HeadSoccer.Screens
         //Starts the gametimer and sets the initial values
             InitializeComponent();
             loadStats();
-            //saveStats();
             GameTimer.Enabled = true;
 
             Player p1 = new Player(88, 320, 15, 80, 170);
@@ -376,26 +377,39 @@ namespace HeadSoccer.Screens
 
         public static void loadStats()
         {
-            //XmlReader reader = XmlReader.Create("stats.xml");
+            XmlReader reader = XmlReader.Create("stats.xml");
 
-            //reader.ReadToFollowing("Longest");
-            //lastTimer = Convert.ToInt16(reader.ReadString());
+            reader.ReadToFollowing("P1Goals");
+            P1Goals = Convert.ToInt16(reader.ReadString());
+
+            reader.ReadToFollowing("P2Goals");
+            P2Goals = Convert.ToInt16(reader.ReadString());
+
+            reader.ReadToFollowing("Longest");
+            lastTimer = Convert.ToInt16(reader.ReadString());
         }
 
         public void saveStats()
         {
-            //XmlWriter writer = XmlWriter.Create("stats.xml", null);
+            //timer = timer / 60;
+            P1Goals += p1Score;
+            P2Goals += p2Score;
 
-            //writer.WriteStartElement("statistics");
+            XmlWriter writer = XmlWriter.Create("stats.xml", null);
 
-            //if(timer > lastTimer)
-            //{
-            //    writer.WriteElementString("Longest", timer.ToString());
-            //}
+            writer.WriteStartElement("statistics");
 
-            //writer.WriteEndElement();
+            writer.WriteElementString("P1Goals", P1Goals.ToString());
+            writer.WriteElementString("P2Goals", P2Goals.ToString());
 
-            //writer.Close();
+            if (timer > lastTimer)
+            {
+                writer.WriteElementString("Longest", timer.ToString());
+            }
+
+            writer.WriteEndElement();
+
+            writer.Close();
         }
     }
 }
